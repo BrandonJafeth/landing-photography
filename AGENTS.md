@@ -367,10 +367,10 @@ photography-platform/
 ├── .env.example
 ├── .gitignore
 ├── package.json
-├── pnpm-workspace.yaml              # Si usas pnpm
-├── turbo.json                        # Si usas Turborepo
 └── README.md
 ```
+
+**Nota**: Los proyectos están separados (no es un monorepo). Cada uno tiene su propio `package.json` y se manejan independientemente con npm.
 
 ---
 
@@ -1246,30 +1246,30 @@ export function initWebVitals() {
 
 ```bash
 # Desarrollo
-pnpm dev:web        # Astro en localhost:4321
-pnpm dev:admin      # Next.js en localhost:3000
+npm run dev                           # Astro en localhost:4321 (landing)
+cd ../admin-photography/admin-photo && npm run dev  # Next.js en localhost:3000 (admin)
 
-# Testing
-pnpm test           # Run all tests
-pnpm test:watch     # Watch mode
-pnpm test:coverage  # Coverage report
-pnpm test:e2e       # Playwright E2E
+# Testing (cuando se configure)
+npm test                              # Run all tests
+npm run test:watch                    # Watch mode
+npm run test:coverage                 # Coverage report
+npm run test:e2e                      # Playwright E2E
 
-# Linting y Formateo
-pnpm lint           # Check linting
-pnpm lint:fix       # Fix linting issues
-pnpm format         # Format with Prettier
+# Linting y Formateo (cuando se configure)
+npm run lint                          # Check linting
+npm run lint:fix                      # Fix linting issues
+npm run format                        # Format with Prettier
 
-# Type Checking
-pnpm type-check     # TypeScript validation
+# Type Checking (cuando se configure)
+npm run type-check                    # TypeScript validation
 
 # Build
-pnpm build:web      # Build Astro
-pnpm build:admin    # Build Next.js
+npm run build                         # Build proyecto actual
+npm run preview                       # Preview build de Astro
 
-# Performance
-pnpm perf           # Run Lighthouse
-pnpm analyze        # Bundle analyzer
+# Performance (cuando se configure)
+npm run perf                          # Run Lighthouse
+npm run analyze                       # Bundle analyzer
 ```
 
 ---
@@ -1691,13 +1691,13 @@ const {
 ### Unit Tests
 ```bash
 # Instalar dependencias
-pnpm add -D vitest @testing-library/react @testing-library/jest-dom
+npm install -D vitest @testing-library/react @testing-library/jest-dom
 ```
 
 ### E2E Tests
 ```bash
 # Instalar Playwright
-pnpm add -D @playwright/test
+npm install -D @playwright/test
 ```
 
 ---
@@ -1706,12 +1706,26 @@ pnpm add -D @playwright/test
 
 ```bash
 # Instalar dependencias
-pnpm install
+npm install
 
 # Desarrollo
-pnpm dev:web    # Astro en localhost:4321
-pnpm dev:admin  # Next.js en localhost:3000
+npm run dev              # Astro en localhost:4321 (landing)
+cd ../admin-photography/admin-photo && npm run dev  # Next.js en localhost:3000 (admin)
 
-# Prisma
-pnpm prisma:generate  # Generar cliente
-p
+# Build
+npm run build            # Build proyecto actual
+npm run preview          # Preview build de Astro
+
+# Testing (cuando se configure)
+npm test                 # Run all tests
+npm run test:watch       # Watch mode
+npm run test:coverage    # Coverage report
+npm run test:e2e         # Playwright E2E
+
+# Linting y Formateo (cuando se configure)
+npm run lint             # Check linting
+npm run lint:fix         # Fix linting issues
+
+# Type Checking (cuando se configure)
+npm run type-check       # TypeScript validation
+```
