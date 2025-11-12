@@ -1,6 +1,8 @@
 ---
 import Navbar from '@/components/layout/Navbar.astro';
 import Footer from '@/components/layout/Footer.astro';
+import ScrollToTop from '@/components/layout/ScrollToTop.astro';
+import WhatsAppButton from '@/components/layout/WhatsAppButton.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -53,6 +55,8 @@ const {
 		</main>
 
 		<Footer />
+		<ScrollToTop />
+		<WhatsAppButton phoneNumber="+50612345678" />
 	</body>
 </html>
 
