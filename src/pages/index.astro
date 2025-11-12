@@ -1,11 +1,14 @@
 ---
-import "../styles/global.css";
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout>
-	<div class="flex flex-col items-center justify-center min-h-screen py-2 bg-green-300">
-     <h1 class="text-4xl font-bold">Hola gente de yutu</h1>	
+<Layout title="Inicio" transparent={true}>
+	<div class="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-[#222222] transition-colors duration-300">
+		<h1 class="text-4xl md:text-6xl font-bold text-[#222222] dark:text-white text-center px-4">
+			Bienvenido a GADEA ISO
+		</h1>
+		<p class="mt-4 text-lg md:text-xl text-[#222222]/70 dark:text-gray-400 text-center px-4">
+			Fotografía profesional de alta calidad
+		</p>
 	</div>
-
 </Layout>

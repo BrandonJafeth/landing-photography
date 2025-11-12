@@ -1,0 +1,133 @@
+/* NavbarMobile Custom Styles */
+
+.menu-grid-pattern {
+  background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+/* Animation classes for menu items */
+.menu-item-delay-0 {
+  transition: all 0.3s ease-out;
+  transition-delay: 200ms;
+}
+
+.menu-item-delay-1 {
+  transition: all 0.3s ease-out;
+  transition-delay: 280ms;
+}
+
+.menu-item-delay-2 {
+  transition: all 0.3s ease-out;
+  transition-delay: 360ms;
+}
+
+.menu-cta-delay {
+  transition: all 0.5s ease-out;
+  transition-delay: 600ms;
+}
+
+.menu-social-delay {
+  transition: all 0.5s ease-out;
+  transition-delay: 700ms;
+}
+
+.menu-item-hidden {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.menu-item-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.menu-cta-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.menu-cta-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-social-hidden {
+  opacity: 0;
+}
+
+.menu-social-visible {
+  opacity: 1;
+}
+
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  top: 80px;
+  background-color: #222222;
+  z-index: 40;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 300ms ease-in-out;
+  overflow-y: auto;
+}
+
+.mobile-menu-overlay.mobile-menu-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile Menu Links */
+.mobile-menu-link {
+  color: white;
+  font-size: 2rem; /* Reducido de 1.875rem a 2rem */
+  font-weight: 600;
+  opacity: 0.7;
+  transform: translateX(-1rem);
+  transition: all 300ms ease-in-out;
+  display: block;
+  padding: 0.5rem 0;
+}
+
+.mobile-menu-link:hover {
+  opacity: 1;
+}
+
+.mobile-menu-link.mobile-menu-link-visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Animación stagger para los links */
+.mobile-menu-link[data-delay="0"].mobile-menu-link-visible {
+  transition-delay: 50ms;
+}
+
+.mobile-menu-link[data-delay="1"].mobile-menu-link-visible {
+  transition-delay: 100ms;
+}
+
+.mobile-menu-link[data-delay="2"].mobile-menu-link-visible {
+  transition-delay: 150ms;
+}
+
+.mobile-menu-link[data-delay="3"].mobile-menu-link-visible {
+  transition-delay: 200ms;
+}
+
+.mobile-menu-link[data-delay="4"].mobile-menu-link-visible {
+  transition-delay: 250ms;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .mobile-menu-link {
+    font-size: 1.75rem;
+  }
+}
+
+@media (min-height: 800px) {
+  .mobile-menu-link {
+    font-size: 2.25rem;
+    padding: 0.75rem 0;
+  }
+}
