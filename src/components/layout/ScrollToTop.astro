@@ -1,0 +1,99 @@
+---
+// Componente de botón para volver al inicio de la página
+---
+
+<button
+  id="scroll-to-top"
+  type="button"
+  aria-label="Volver al inicio"
+  class="fixed bottom-8 right-8 z-40 w-12 h-12 rounded-full 
+         bg-white dark:bg-[#1a1a1a] 
+         border-2 border-[#000000] dark:border-white
+         flex items-center justify-center
+         text-[#000000] dark:text-white
+         shadow-lg hover:shadow-xl
+         transition-all duration-300
+         opacity-0 invisible
+         hover:scale-110 hover:-translate-y-1
+         group"
+>
+  <svg 
+    class="w-6 h-6 transition-transform duration-300 group-hover:-translate-y-1" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24"
+    aria-hidden="true"
+  >
+    <path 
+      stroke-linecap="round" 
+      stroke-linejoin="round" 
+      stroke-width="2" 
+      d="M5 10l7-7m0 0l7 7m-7-7v18" 
+    />
+  </svg>
+</button>
+
+<script>
+  function initScrollToTop() {
+    const scrollButton = document.getElementById('scroll-to-top');
+    if (!scrollButton) return;
+
+    // Mostrar/ocultar botón según scroll
+    function toggleScrollButton() {
+      const button = scrollButton;
+      if (!button) return;
+      
+      if (window.scrollY > 300) {
+        button.classList.remove('opacity-0', 'invisible');
+        button.classList.add('opacity-100', 'visible');
+      } else {
+        button.classList.add('opacity-0', 'invisible');
+        button.classList.remove('opacity-100', 'visible');
+      }
+    }
+
+    // Scroll suave al inicio
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Event listeners
+    window.addEventListener('scroll', toggleScrollButton, { passive: true });
+    scrollButton.addEventListener('click', scrollToTop);
+
+    // Check inicial
+    toggleScrollButton();
+  }
+
+  // Inicializar
+  initScrollToTop();
+
+  // Reinicializar en navegación SPA (si aplica)
+  document.addEventListener('astro:page-load', initScrollToTop);
+</script>
+
+<style>
+  #scroll-to-top {
+    /* Animación de entrada */
+    animation: fadeInUp 0.3s ease-out;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Efecto hover mejorado */
+  #scroll-to-top:active {
+    transform: scale(0.95) translateY(-2px);
+  }
+</style>

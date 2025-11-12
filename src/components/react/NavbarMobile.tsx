@@ -16,18 +16,18 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
   const [mounted, setMounted] = useState(false);
   const [isDark, setIsDark] = useState(false);
 
-  // Detectar que estamos en el cliente y sincronizar tema
+
   useEffect(() => {
     setMounted(true);
     setIsDark(document.documentElement.classList.contains('dark'));
   }, []);
 
-  // Cerrar menú cuando cambia la ruta
+
   useEffect(() => {
     setIsOpen(false);
   }, [currentPath]);
 
-  // Prevenir scroll cuando el menú está abierto
+
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -56,7 +56,7 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
     }
   };
 
-  // Contenido del menú
+
   const menuContent = (
     <div
       className={`fixed inset-0 bg-[#000000] z-50 transition-all duration-500 ease-out ${
