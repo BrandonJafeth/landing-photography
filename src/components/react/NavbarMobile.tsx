@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
-import './NavbarMobile.css';
 
 interface NavLink {
   href: string;
@@ -60,7 +59,7 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
   // Contenido del menú
   const menuContent = (
     <div
-      className={`fixed inset-0 bg-[#222222] z-50 transition-all duration-500 ease-out ${
+      className={`fixed inset-0 bg-[#000000] z-50 transition-all duration-500 ease-out ${
         isOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
       }`}
       role="dialog"
@@ -250,7 +249,7 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
       <button
         onClick={toggleMenu}
         className="relative w-10 h-10 flex items-center justify-center 
-                   dark:text-white text-[#222222] focus:outline-none focus-visible:ring-2 
+                   dark:text-white text-[#000000] focus:outline-none focus-visible:ring-2 
                    focus-visible:ring-white rounded-lg"
         aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
         aria-expanded={isOpen ? true : false}

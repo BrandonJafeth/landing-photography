@@ -7,7 +7,7 @@ export default {
 				sans: ['Work Sans', 'sans-serif'],
 			},
 			colors: {
-				dark: '#222222',
+				dark: '#000000',
 				light: '#ffffff',
 			},
 		},

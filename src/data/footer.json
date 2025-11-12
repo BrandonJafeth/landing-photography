@@ -1,0 +1,98 @@
+{
+  "brand": {
+    "name": "GADEA ISO",
+    "description": "El arte de capturar tu esencia. Fotografía profesional para momentos que permanecen.",
+    "rating": {
+      "score": 5,
+      "max": 5,
+      "total": 16,
+      "label": "clientes"
+    },
+    "stats": {
+      "events": 100,
+      "label": "eventos documentados"
+    }
+  },
+  "services": [
+    {
+      "label": "Bodas",
+      "href": "/servicios/bodas"
+    },
+    {
+      "label": "Eventos",
+      "href": "/servicios/eventos"
+    },
+    {
+      "label": "Cumpleaños",
+      "href": "/servicios/cumpleanos"
+    },
+    {
+      "label": "Promoción",
+      "href": "/servicios/promocion"
+    }
+  ],
+  "infoLinks": [
+    {
+      "label": "Portfolio",
+      "href": "/portafolio"
+    },
+    {
+      "label": "Sobre mí",
+      "href": "/sobre-mi"
+    },
+    {
+      "label": "Testimonios",
+      "href": "/testimonios"
+    },
+    {
+      "label": "Contacto",
+      "href": "/contacto"
+    }
+  ],
+  "contact": {
+    "email": "joel@gadeaiso.com",
+    "phone": "+506 1234-5678",
+    "location": "Santa Cruz, Guanacaste",
+    "schedule": "Lun-Sab 9:00-18:00"
+  },
+  "social": [
+    {
+      "name": "Instagram",
+      "href": "https://instagram.com/gadeaiso",
+      "icon": "instagram"
+    },
+    {
+      "name": "Facebook",
+      "href": "https://facebook.com/gadeaiso",
+      "icon": "facebook"
+    },
+    {
+      "name": "WhatsApp",
+      "href": "https://wa.me/50612345678",
+      "icon": "whatsapp"
+    },
+    {
+      "name": "Email",
+      "href": "mailto:joel@gadeaiso.com",
+      "icon": "email"
+    }
+  ],
+  "legal": {
+    "companyName": "Gadea ISO",
+    "country": "Costa Rica",
+    "links": [
+      {
+        "label": "Privacidad",
+        "href": "/privacidad"
+      },
+      {
+        "label": "Términos",
+        "href": "/terminos"
+      },
+      {
+        "label": "Cookies",
+        "href": "/cookies"
+      }
+    ]
+  }
+}
