@@ -1,0 +1,124 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import NavbarMobile from '@/components/react/NavbarMobile';
+
+interface Props {
+  transparent?: boolean;
+}
+
+const { transparent = false } = Astro.props;
+
+const NAV_LINKS = [
+  { href: '/servicios', label: 'Servicios' },
+  { href: '/sobre-mi', label: 'Sobre mí' },
+  { href: '/portafolio', label: 'Portafolio' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<nav 
+  id="main-navbar"
+  class:list={[
+    'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+    'dark:bg-[#000000]/95 bg-white/95 backdrop-blur-md',
+    'dark:text-white text-[#000000]',
+    transparent ? 'bg-transparent' : 'shadow-lg'
+  ]}
+>
+  <div class="container mx-auto px-4 lg:px-8">
+    <div class="flex items-center justify-between h-20">
+      
+      <!-- Logo -->
+      <a 
+        href="/" 
+        class="text-2xl md:text-3xl font-bold tracking-tight hover:opacity-80 transition-opacity"
+        aria-label="GADEA ISO - Inicio"
+      >
+        GADEA ISO
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center space-x-8" aria-label="Navegación principal">
+        {NAV_LINKS.map(({ href, label }) => (
+          <a 
+            href={href}
+            class:list={[
+              'font-medium transition-all duration-200 relative group',
+              currentPath === href ? 'opacity-100' : 'opacity-80 hover:opacity-100'
+            ]}
+            aria-current={currentPath === href ? 'page' : undefined}
+          >
+            {label}
+            <span 
+              class:list={[
+                'absolute bottom-0 left-0 w-full h-0.5 dark:bg-white bg-[#000000]',
+                'transition-transform duration-200 origin-left',
+                currentPath === href ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+              ]}
+              aria-hidden="true"
+            />
+          </a>
+        ))}
+      </nav>
+
+      <!-- Desktop Actions -->
+      <div class="hidden md:flex items-center gap-6">
+        <ThemeToggle />
+        
+        <a 
+          href="/contacto"
+          class="px-6 py-2.5 border-2 dark:border-white border-[#000000] rounded-full font-medium 
+                 dark:hover:bg-white hover:bg-[#000000] dark:hover:text-[#000000] hover:text-white 
+                 transition-all duration-300 transform hover:scale-105"
+        >
+          Contáctame
+        </a>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div class="md:hidden">
+        <NavbarMobile client:load navLinks={NAV_LINKS} currentPath={currentPath} />
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Spacer para contenido -->
+<div class="h-20" aria-hidden="true"></div>
+
+<script>
+  const navbar = document.getElementById('main-navbar');
+  
+  if (navbar) {
+    let lastScroll = 0;
+
+    const handleScroll = () => {
+      const currentScroll = window.pageYOffset;
+
+      if (currentScroll <= 0) {
+        navbar.classList.remove('shadow-lg');
+      } else {
+        navbar.classList.add('shadow-lg');
+        navbar.classList.remove('bg-transparent');
+      }
+
+      lastScroll = currentScroll;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }
+</script>
+
+<style>
+  /* Performance optimization */
+  nav {
+    will-change: transform;
+  }
+
+  /* Active state feedback */
+  button:active,
+  a:active {
+    transform: scale(0.98);
+  }
+</style>

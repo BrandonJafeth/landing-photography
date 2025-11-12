@@ -1,1 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Work Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ============================================ */
+/* NAVBAR MOBILE - Animaciones y estilos */
+/* ============================================ */
+
+.menu-grid-pattern {
+  background-image: radial-gradient(circle, #fff 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.menu-item-delay-0 {
+  transition: all 0.3s ease-out;
+  transition-delay: 200ms;
+}
+
+.menu-item-delay-1 {
+  transition: all 0.3s ease-out;
+  transition-delay: 280ms;
+}
+
+.menu-item-delay-2 {
+  transition: all 0.3s ease-out;
+  transition-delay: 360ms;
+}
+
+.menu-cta-delay {
+  transition: all 0.5s ease-out;
+  transition-delay: 600ms;
+}
+
+.menu-social-delay {
+  transition: all 0.5s ease-out;
+  transition-delay: 700ms;
+}
+
+.menu-item-hidden {
+  opacity: 0;
+  transform: translateY(30px) scale(0.9);
+}
+
+.menu-item-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.menu-cta-hidden {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.menu-cta-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-social-hidden {
+  opacity: 0;
+}
+
+.menu-social-visible {
+  opacity: 1;
+}
