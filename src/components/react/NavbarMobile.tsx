@@ -71,8 +71,12 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
         {/* Theme Toggle Button */}
         <button
           onClick={toggleTheme}
-          className="w-10 h-10 rounded-full border-2 border-white/20 flex items-center justify-center 
-                     text-white hover:bg-white/10 transition-all duration-200 group"
+          className={`w-10 h-10 rounded-full border-2 flex items-center justify-center 
+                     transition-all duration-200 group ${
+                       isDark 
+                         ? 'border-white/20 text-white hover:bg-white/10'
+                         : 'border-black/20 text-black hover:bg-black/10'
+                     }`}
           aria-label={isDark ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
           type="button"
         >
@@ -112,8 +116,12 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
         {/* Close Button */}
         <button
           onClick={closeMenu}
-          className="w-12 h-12 flex items-center justify-center 
-                     text-white hover:text-gray-300 transition-colors duration-300 group"
+          className={`w-12 h-12 flex items-center justify-center 
+                     transition-colors duration-300 group ${
+                       isDark 
+                         ? 'text-white hover:text-gray-300'
+                         : 'text-black hover:text-gray-700'
+                     }`}
           aria-label="Cerrar menú"
           type="button"
         >
@@ -134,7 +142,11 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
 
       {/* Gradient Background */}
       <div 
-        className="absolute inset-0 opacity-90 bg-gradient-to-br from-gray-800 via-gray-900 to-black" 
+        className={`absolute inset-0 opacity-90 transition-colors duration-300 ${
+          isDark 
+            ? 'bg-gradient-to-br from-[#2a2a2a] via-[#1a1a1a] to-[#000000]'
+            : 'bg-gradient-to-br from-[#f5f5f5] via-[#e5e5e5] to-[#d4d4d4]'
+        }`}
         aria-hidden="true"
       />
 
@@ -164,15 +176,19 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
                           transition-all duration-300
                           menu-item-delay-${index}
                           ${isOpen ? 'menu-item-visible' : 'menu-item-hidden'}
-                          ${isActive ? 'text-white' : 'text-gray-500 hover:text-white'}`}
+                          ${isActive 
+                            ? (isDark ? 'text-[#ffffff]' : 'text-[#000000]')
+                            : (isDark ? 'text-[#ffffff]/60 hover:text-[#ffffff]' : 'text-[#000000]/60 hover:text-[#000000]')
+                          }`}
                 aria-current={isActive ? 'page' : undefined}
               >
                 {link.label}
                 
                 {/* Animated Underline */}
                 <span 
-                  className={`absolute -bottom-2 left-0 h-1 bg-white rounded-full
+                  className={`absolute -bottom-2 left-0 h-1 rounded-full
                             transition-all duration-300
+                            ${isDark ? 'bg-[#ffffff]' : 'bg-[#000000]'}
                             ${isActive ? 'w-full' : 'w-0 group-hover:w-full'}`}
                   aria-hidden="true"
                 />
@@ -180,24 +196,6 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
             );
           })}
         </nav>
-
-        {/* CTA Button */}
-        <div 
-          className={`w-full max-w-md menu-cta-delay ${
-            isOpen ? 'menu-cta-visible' : 'menu-cta-hidden'
-          }`}
-        >
-          <a
-            href="/contacto"
-            onClick={closeMenu}
-            className="block w-full px-8 py-4 bg-white text-black text-center
-                       font-semibold rounded-full hover:bg-gray-100
-                       transition-all duration-300 transform hover:scale-105
-                       shadow-2xl shadow-white/20"
-          >
-            Contáctame
-          </a>
-        </div>
 
         {/* Social Links */}
         <div 
@@ -209,7 +207,9 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
             href="https://instagram.com" 
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors duration-200"
+            className={`transition-colors duration-200 ${
+              isDark ? 'text-[#ffffff]/50 hover:text-[#ffffff]' : 'text-[#000000]/50 hover:text-[#000000]'
+            }`}
             aria-label="Instagram"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -221,7 +221,9 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
             href="https://behance.net" 
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-white transition-colors duration-200"
+            className={`transition-colors duration-200 ${
+              isDark ? 'text-[#ffffff]/50 hover:text-[#ffffff]' : 'text-[#000000]/50 hover:text-[#000000]'
+            }`}
             aria-label="Behance"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -231,7 +233,9 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
 
           <a 
             href="mailto:contact@gadea-iso.com" 
-            className="text-gray-400 hover:text-white transition-colors duration-200"
+            className={`transition-colors duration-200 ${
+              isDark ? 'text-[#ffffff]/50 hover:text-[#ffffff]' : 'text-[#000000]/50 hover:text-[#000000]'
+            }`}
             aria-label="Email"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
