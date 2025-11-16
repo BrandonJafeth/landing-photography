@@ -58,14 +58,16 @@ COMMENT ON COLUMN site_content.type IS 'text, image, video, url, json';
 -- ============ TABLA: services ============
 CREATE TABLE services (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-  title VARCHAR(200) NOT NULL,
-  slug VARCHAR(200) UNIQUE NOT NULL,
-  description TEXT NOT NULL,
-  price DECIMAL(10, 2) NOT NULL,
-  currency VARCHAR(3) DEFAULT 'USD',
-  duration INTEGER, -- minutos
-  image TEXT, -- URL de Cloudinary
-  features TEXT[], -- array de características
+  title VARCHAR(200) NOT NULL, -- BODAS, CUMPLEAÑOS, EVENTOS, PROMOCIÓN
+  slug VARCHAR(200) UNIQUE NOT NULL, -- bodas, cumpleanos, eventos, promocion
+  description TEXT NOT NULL, -- Descripción corta para la tarjeta
+  detailed_description TEXT, -- Descripción detallada para la página individual
+  image TEXT NOT NULL, -- URL de Cloudinary (imagen principal de la tarjeta)
+  gallery_images TEXT[], -- Array de URLs de Cloudinary para galería del servicio
+  cta_text VARCHAR(50) DEFAULT 'SOLICITAR →', -- Texto del botón CTA
+  cta_link VARCHAR(200), -- Link personalizado (si no usa el formulario general)
+  features JSONB, -- Características del servicio: ["300 fotos", "8 horas", etc.]
+  pricing JSONB, -- Información de precios (puede ser rango, paquetes, etc.)
   is_active BOOLEAN DEFAULT true,
   "order" INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW(),
@@ -74,8 +76,15 @@ CREATE TABLE services (
 
 CREATE INDEX idx_services_slug ON services(slug);
 CREATE INDEX idx_services_active ON services(is_active) WHERE is_active = true;
+CREATE INDEX idx_services_order ON services("order");
 
 COMMENT ON TABLE services IS 'Servicios/paquetes de fotografía ofrecidos';
+COMMENT ON COLUMN services.title IS 'Nombre del servicio en mayúsculas para mostrar';
+COMMENT ON COLUMN services.slug IS 'URL-friendly identifier para rutas';
+COMMENT ON COLUMN services.image IS 'Imagen principal que aparece en la tarjeta del landing';
+COMMENT ON COLUMN services.gallery_images IS 'Array de URLs para galería en página de detalle';
+COMMENT ON COLUMN services.features IS 'JSON array de características: ["300 fotos editadas", "Álbum físico"]';
+COMMENT ON COLUMN services.pricing IS 'JSON con estructura de precios: {"base": 1500, "currency": "USD", "packages": []}';
 
 -- ============ TABLA: projects ============
 CREATE TABLE projects (
@@ -206,13 +215,44 @@ CREATE TRIGGER set_timestamp_contact_messages
 -- ============ DATOS INICIALES (SEED) ============
 INSERT INTO site_content (key, value, type) VALUES
   ('hero_title', 'Capturamos Momentos Inolvidables', 'text'),
-  ('hero_subtitle', 'Fotografía profesional para bodas, eventos y retratos', 'text'),
+  ('hero_subtitle', 'Fotografía profesional para bodas, eventos, cumpleaños y promoción comercial', 'text'),
   ('about_title', 'Sobre Nosotros', 'text'),
   ('about_text', 'Con más de 10 años de experiencia...', 'text'),
-  ('contact_email', 'info@tufotografia.com', 'text'),
-  ('contact_phone', '+1234567890', 'text'),
+  ('contact_email', 'joel@gadeaiso.com', 'text'),
+  ('contact_phone', '+506 1234-5678', 'text'),
   ('social_instagram', 'https://instagram.com/tufotografia', 'url'),
   ('social_facebook', 'https://facebook.com/tufotografia', 'url');
+
+-- ============ SERVICIOS INICIALES ============
+INSERT INTO services (title, slug, description, "order", is_active) VALUES
+  (
+    'BODAS',
+    'bodas',
+    'Cada historia de amor merece ser contada con autenticidad y emoción. Capturamos cada momento especial de tu día más importante.',
+    1,
+    true
+  ),
+  (
+    'CUMPLEAÑOS',
+    'cumpleanos',
+    'Capturamos cada sonrisa y momento especial de tu celebración. Desde fiestas infantiles hasta celebraciones de adultos.',
+    2,
+    true
+  ),
+  (
+    'EVENTOS',
+    'eventos',
+    'Retratamos la energía y el ambiente de sus actividades recreativas. Desde eventos corporativos hasta celebraciones sociales.',
+    3,
+    true
+  ),
+  (
+    'PROMOCIÓN',
+    'promocion',
+    'Creamos imágenes que impulsan la presencia digital de tu negocio. Fotografía comercial y de productos de alta calidad.',
+    4,
+    true
+  );
 ```
 
 ### Configuración de Cloudinary en Supabase
