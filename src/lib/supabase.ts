@@ -13,6 +13,22 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
 })
 
 // Tipos de la base de datos
+export interface Database {
+  public: {
+    Tables: {
+      services: {
+        Row: Service
+      }
+      testimonials: {
+        Row: Testimonial
+      }
+      site_content: {
+        Row: SiteContent
+      }
+    }
+  }
+}
+
 export interface Service {
   id: string
   title: string
@@ -30,6 +46,19 @@ export interface Service {
     packages?: Array<{ name: string; price: number }>
   } | null
   is_active: boolean
+  order: number
+  created_at: string
+  updated_at: string
+}
+
+export interface Testimonial {
+  id: string
+  client_name: string
+  text: string
+  rating: number
+  image: string | null
+  position: string | null
+  is_visible: boolean
   order: number
   created_at: string
   updated_at: string
