@@ -1,13 +1,28 @@
 ---
-// Contact Section - Formulario de contacto
+import ContactForm from '@/components/react/ContactForm'
 ---
 
-<section id="contact" class="py-20 px-4 bg-gray-50 dark:bg-[#0a0a0a] transition-colors duration-300">
+<section id="contact" class="py-20 px-4 bg-white dark:bg-[#1a1a1a] transition-colors duration-300">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center p-12 border-2 border-dashed border-[#000000]/20 dark:border-white/20 rounded-lg">
-      <p class="text-2xl text-[#000000]/50 dark:text-gray-500 italic">
-        📧 Aquí va el Formulario de Contacto
+    <!-- Título de la sección -->
+    <div class="text-center mb-16">
+      <div class="flex items-center justify-center gap-8 mb-3">
+        <div class="h-[1px] w-32 md:w-64 bg-[#000000] dark:bg-white"></div>
+      </div>
+      <h2 class="text-3xl md:text-5xl font-bold text-[#000000] dark:text-white tracking-[0.3em] mb-3">
+        CONTACTO
+      </h2>
+      <div class="flex items-center justify-center gap-8 mb-6">
+        <div class="h-[1px] w-32 md:w-64 bg-[#000000] dark:bg-white"></div>
+      </div>
+      <p class="text-xs md:text-sm text-[#999999] dark:text-gray-500 uppercase tracking-[0.2em]">
+        Solicita tu cotización
       </p>
+    </div>
+
+    <!-- Formulario -->
+    <div class="max-w-2xl mx-auto">
+      <ContactForm client:load />
     </div>
   </div>
 </section>

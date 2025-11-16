@@ -64,6 +64,23 @@ export interface Testimonial {
   updated_at: string
 }
 
+export interface ContactMessage {
+  id: string
+  name: string
+  email: string
+  phone: string | null
+  service_type: string
+  event_date: string | null
+  message: string
+  how_found_us: string | null
+  status: 'pending' | 'read' | 'responded' | 'archived'
+  responded_at: string | null
+  response: string | null
+  notes: string | null
+  created_at: string
+  updated_at: string
+}
+
 export interface SiteContent {
   id: string
   key: string
