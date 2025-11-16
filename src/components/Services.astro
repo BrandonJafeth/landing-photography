@@ -1,0 +1,127 @@
+---
+import { supabase } from '@/lib/supabase'
+import type { Service } from '@/lib/supabase'
+
+// Obtener servicios activos desde Supabase
+const { data: services, error } = await supabase
+  .from('services')
+  .select('*')
+  .eq('is_active', true)
+  .order('order', { ascending: true })
+
+if (error) {
+  console.error('Error fetching services:', error)
+}
+
+const activeServices: Service[] = services || []
+---
+
+<section id="servicios" class="py-20 px-4 bg-white dark:bg-[#000000] transition-colors duration-300">
+  <div class="max-w-7xl mx-auto">
+    <!-- Título de la sección -->
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-5xl font-bold text-[#000000] dark:text-white mb-4">
+        Nuestros Servicios
+      </h2>
+      <p class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl mx-auto">
+        Capturamos tus momentos más especiales con profesionalismo y dedicación
+      </p>
+    </div>
+
+    <!-- Grid de servicios -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+      {activeServices.map((service) => (
+        <div class="group relative overflow-hidden rounded-xl border-[3px] border-[#000000] dark:border-white bg-white dark:bg-[#1a1a1a] transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+          <!-- Imagen del servicio -->
+          <div class="relative h-64 overflow-hidden">
+            <img
+              src={service.image}
+              alt={service.title}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+            />
+          </div>
+
+          <!-- Contenido -->
+          <div class="p-6">
+            <!-- Título -->
+            <h3 class="text-xl font-bold text-[#000000] dark:text-white mb-3">
+              {service.title}
+            </h3>
+
+            <!-- Línea decorativa -->
+            <div class="w-12 h-[3px] bg-[#000000] dark:bg-white mb-4"></div>
+
+            <!-- Descripción -->
+            <p class="text-sm text-[#000000]/70 dark:text-gray-400 mb-5 leading-relaxed min-h-[60px]">
+              {service.description}
+            </p>
+
+            <!-- Botón CTA -->
+            <a
+              href={service.cta_link || '/contacto'}
+              class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-[#000000] dark:border-white text-[#000000] dark:text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-[#000000] hover:text-white dark:hover:bg-white dark:hover:text-[#000000] group/btn"
+            >
+              <span>{service.cta_text}</span>
+              <svg 
+                class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24"
+              >
+                <path 
+                  stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {activeServices.length === 0 && (
+      <div class="text-center py-12">
+        <p class="text-lg text-[#000000]/70 dark:text-gray-400">
+          No hay servicios disponibles en este momento.
+        </p>
+      </div>
+    )}
+  </div>
+</section>
+
+<style>
+  /* Animación sutil para las tarjetas */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .group {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  .group:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .group:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .group:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .group:nth-child(4) {
+    animation-delay: 0.4s;
+  }
+</style>
