@@ -26,24 +26,34 @@ const restContent = lines.slice(1).join("\n\n") || "";
 
 <section
   id="about"
-  class="py-20 px-4 bg-[#f5f5f5] dark:bg-[#0a0a0a] transition-colors duration-300"
+  class="py-20 px-4 bg-white dark:bg-black/90 transition-colors duration-300"
 >
   <div class="max-w-7xl mx-auto">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Imagen -->
       <div
-        class="order-2 lg:order-1 animate-fade-in flex justify-center lg:justify-start"
+        class="order-2 lg:order-1 animate-fade-in flex justify-center lg:justify-start px-4"
         style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;"
       >
-        <div
-          class="relative rounded-lg overflow-hidden shadow-2xl max-w-md w-full"
-        >
-          <img
-            src={aboutContent.image_url}
-            alt={aboutContent.image_alt || aboutContent.title}
-            class="w-full h-auto object-contain"
-            loading="lazy"
-          />
+        <div class="relative w-full max-w-[350px] sm:max-w-md">
+          <!-- Stack de fotos -->
+          <div class="polaroid-stack">
+            <!-- Foto principal -->
+            <div class="polaroid-card">
+              <div class="polaroid-inner">
+                <img
+                  src={aboutContent.image_url}
+                  alt={aboutContent.image_alt || aboutContent.title}
+                  class="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <!-- Foto de fondo 1 -->
+            <div class="polaroid-card polaroid-back-1"></div>
+            <!-- Foto de fondo 2 -->
+            <div class="polaroid-card polaroid-back-2"></div>
+          </div>
         </div>
       </div>
 
@@ -55,7 +65,7 @@ const restContent = lines.slice(1).join("\n\n") || "";
         <!-- Título con línea inferior -->
         <div class="mb-8 text-center">
           <h2
-            class="text-2xl md:text-3xl font-semibold text-[#000000] dark:text-white uppercase tracking-[0.3em] mb-2"
+            class="text-2xl md:text-3xl font-semibold text-[#000000] dark:text-white uppercase mb-2"
           >
             {aboutContent.title}
           </h2>
@@ -65,14 +75,16 @@ const restContent = lines.slice(1).join("\n\n") || "";
         <!-- Subtítulo -->
         {
           subtitle && (
-            <p class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl mx-auto">
+            <p class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl mx-2">
               {subtitle}
             </p>
           )
         }
 
         <!-- Descripción -->
-        <div class="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+        <div
+          class="space-y-4 text-gray-700 dark:text-gray-300 mx-2 leading-relaxed"
+        >
           {
             restContent
               .split(".")
@@ -101,5 +113,76 @@ const restContent = lines.slice(1).join("\n\n") || "";
 
   .animate-fade-in {
     animation: fade-in 0.8s ease-out;
+  }
+
+  /* Polaroid Stack Effect */
+  .polaroid-stack {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .polaroid-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: #fff;
+    border: 4px solid #000;
+    box-shadow: 0 5% 15% rgba(0, 0, 0, 0.5);
+    transition: transform 0.25s ease;
+  }
+
+  .polaroid-inner {
+    width: 100%;
+    height: 100%;
+    padding: 3%;
+    padding-bottom: 8%;
+    background: #fff;
+  }
+
+  .polaroid-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Fotos de fondo apiladas */
+  .polaroid-back-1,
+  .polaroid-back-2 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #e8e8e8;
+    pointer-events: none;
+  }
+
+  .polaroid-back-1 {
+    transform: rotate(-4deg) translateY(-2%);
+    z-index: -1;
+  }
+
+  .polaroid-back-2 {
+    transform: rotate(4deg) translateY(-4%);
+    z-index: -2;
+  }
+
+  /* Hover effect */
+  .polaroid-stack:hover .polaroid-card:first-child {
+    transform: rotate(-2deg);
+  }
+
+  /* Dark mode */
+  :global(.dark) .polaroid-card {
+    background: #1a1a1a;
+    border-color: #fff;
+  }
+
+  :global(.dark) .polaroid-inner {
+    background: #1a1a1a;
+  }
+
+  :global(.dark) .polaroid-back-1,
+  :global(.dark) .polaroid-back-2 {
+    background: #2a2a2a;
   }
 </style>

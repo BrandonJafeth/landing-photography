@@ -1,13 +1,239 @@
 ---
-// Gallery Section - Portafolio/Galería de fotos
+import { supabase } from '@/lib/supabase'
+
+// Obtener solo las 6-8 imágenes destacadas para el grid de la landing
+const { data: featuredImages, error } = await supabase
+  .from('portfolio_images')
+  .select('*')
+  .eq('is_visible', true)
+  .eq('is_featured', true)
+  .order('featured_order', { ascending: true })
+  .limit(8)
+
+if (error) {
+  console.error('Error fetching portfolio images:', error)
+}
+
+const images = featuredImages || []
 ---
 
-<section id="gallery" class="py-20 px-4 bg-white dark:bg-[#000000] transition-colors duration-300">
+<section id="portafolio" class="py-20 px-4 bg-white dark:bg-black/90 transition-colors duration-300">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center p-12 border-2 border-dashed border-[#000000]/20 dark:border-white/20 rounded-lg">
-      <p class="text-2xl text-[#000000]/50 dark:text-gray-500 italic">
-        🖼️ Aquí va el Portafolio/Galería
+    <!-- Título de la sección -->
+    <div class="text-center mb-16">
+      <h2 class="text-2xl md:text-3xl font-semibold text-[#000000] dark:text-white mb-2">
+        PORTAFOLIO
+      </h2>
+      <div class="w-16 h-[1px] bg-[#000000] dark:bg-white mx-auto mb-6"></div>
+      <p class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl tracking-wide mx-auto">
+        Nuestros mejores trabajos
       </p>
     </div>
+
+    <!-- Bento Grid -->
+    {images.length > 0 ? (
+      <div class="bento-grid">
+        {images.map((image, index) => (
+          <a
+            href={image.link_url || '/portafolio'}
+            class={`bento-item bento-item-${index + 1} group`}
+            data-category={image.category}
+          >
+            <div class="relative w-full h-full overflow-hidden rounded-lg">
+              <img
+                src={image.thumbnail_url || image.image_url}
+                alt={image.alt}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
+              />
+              {/* Overlay con categoría */}
+              <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div class="absolute bottom-0 left-0 right-0 p-4">
+                  {image.title && (
+                    <h3 class="text-white font-semibold text-lg mb-1">
+                      {image.title}
+                    </h3>
+                  )}
+                  <p class="text-white/80 text-sm uppercase tracking-wider">
+                    {image.category}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- Botón para ver galería completa -->
+      <div class="text-center mt-12">
+        <a
+          href="/portafolio"
+          class="inline-flex items-center gap-2 px-8 py-3 border-2 border-[#000000] dark:border-white text-[#000000] dark:text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-[#000000] hover:text-white dark:hover:bg-white dark:hover:text-[#000000] group"
+        >
+          <span>Ver Galería Completa</span>
+          <svg 
+            class="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" 
+            fill="none" 
+            stroke="currentColor" 
+            viewBox="0 0 24 24"
+          >
+            <path 
+              stroke-linecap="round" 
+              stroke-linejoin="round" 
+              stroke-width="2" 
+              d="M17 8l4 4m0 0l-4 4m4-4H3"
+            />
+          </svg>
+        </a>
+      </div>
+    ) : (
+      <div class="text-center py-12">
+        <p class="text-lg text-[#000000]/70 dark:text-gray-400">
+          No hay imágenes disponibles en este momento.
+        </p>
+      </div>
+    )}
   </div>
 </section>
+
+<style>
+  /* Bento Grid Layout */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-auto-rows: 200px;
+    gap: 1rem;
+  }
+
+  /* Distribución Bento Grid - Desktop */
+  .bento-item-1 {
+    grid-column: span 6;
+    grid-row: span 2;
+  }
+
+  .bento-item-2 {
+    grid-column: span 6;
+    grid-row: span 2;
+  }
+
+  .bento-item-3 {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+
+  .bento-item-4 {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+
+  .bento-item-5 {
+    grid-column: span 4;
+    grid-row: span 2;
+  }
+
+  .bento-item-6 {
+    grid-column: span 6;
+    grid-row: span 2;
+  }
+
+  .bento-item-7 {
+    grid-column: span 6;
+    grid-row: span 2;
+  }
+
+  .bento-item-8 {
+    grid-column: span 12;
+    grid-row: span 2;
+  }
+
+  /* Responsive - Tablet */
+  @media (max-width: 1024px) {
+    .bento-grid {
+      grid-auto-rows: 180px;
+      gap: 0.75rem;
+    }
+
+    .bento-item-1,
+    .bento-item-2 {
+      grid-column: span 6;
+      grid-row: span 2;
+    }
+
+    .bento-item-3,
+    .bento-item-4,
+    .bento-item-5 {
+      grid-column: span 4;
+      grid-row: span 2;
+    }
+
+    .bento-item-6,
+    .bento-item-7 {
+      grid-column: span 6;
+      grid-row: span 2;
+    }
+
+    .bento-item-8 {
+      grid-column: span 12;
+      grid-row: span 2;
+    }
+  }
+
+  /* Responsive - Mobile */
+  @media (max-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(6, 1fr);
+      grid-auto-rows: 150px;
+      gap: 0.5rem;
+    }
+
+    .bento-item-1,
+    .bento-item-2 {
+      grid-column: span 6;
+      grid-row: span 2;
+    }
+
+    .bento-item-3,
+    .bento-item-4 {
+      grid-column: span 3;
+      grid-row: span 2;
+    }
+
+    .bento-item-5,
+    .bento-item-6 {
+      grid-column: span 3;
+      grid-row: span 2;
+    }
+
+    .bento-item-7,
+    .bento-item-8 {
+      grid-column: span 6;
+      grid-row: span 2;
+    }
+  }
+
+  /* Animación de entrada */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .bento-item {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .bento-item:nth-child(1) { animation-delay: 0.1s; }
+  .bento-item:nth-child(2) { animation-delay: 0.15s; }
+  .bento-item:nth-child(3) { animation-delay: 0.2s; }
+  .bento-item:nth-child(4) { animation-delay: 0.25s; }
+  .bento-item:nth-child(5) { animation-delay: 0.3s; }
+  .bento-item:nth-child(6) { animation-delay: 0.35s; }
+  .bento-item:nth-child(7) { animation-delay: 0.4s; }
+  .bento-item:nth-child(8) { animation-delay: 0.45s; }
+</style>
