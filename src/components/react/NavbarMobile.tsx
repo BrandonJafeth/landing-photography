@@ -162,7 +162,7 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
       <div className="relative h-full w-full flex flex-col items-center justify-center px-6">
         
         {/* Main Navigation */}
-        <nav className="flex flex-col items-center space-y-2 mb-16">
+        <nav className="flex flex-col items-center space-y-8 mb-16">
           {navLinks.map((link, index) => {
             const isActive = currentPath === link.href;
             
@@ -178,7 +178,7 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
                           ${isOpen ? 'menu-item-visible' : 'menu-item-hidden'}
                           ${isActive 
                             ? (isDark ? 'text-[#ffffff]' : 'text-[#000000]')
-                            : (isDark ? 'text-[#ffffff]/60 hover:text-[#ffffff]' : 'text-[#000000]/60 hover:text-[#000000]')
+                            : (isDark ? 'text-[#ffffff]/60 hover:text-[#ffffff]' : 'text-[#000000]/70 hover:text-[#000000]')
                           }`}
                 aria-current={isActive ? 'page' : undefined}
               >
