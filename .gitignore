@@ -22,3 +22,36 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# VSCode
+.vscode/
+
+# Local env files
+.env.local
+.env.*.local
+.env.test
+.env.development
+
+# Cache and build folders
+.cache/
+.vite/
+.parcel-cache/
+.turbo/
+.output/
+.vercel_build_output/
+
+# Vercel
+.vercel/
+.vercel/output/
+
+# Coverage and test
+coverage/
+.nyc_output/
+playwright-report/
+
+# OS
+Thumbs.db
+
+# Misc
+*.log
+*.tgz
