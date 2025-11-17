@@ -1,13 +1,106 @@
 ---
-// About Us Section - Acerca de nosotros
+import { supabase } from "@/lib/supabase";
+
+// Fetch About Us content from Supabase
+const { data: aboutData, error } = await supabase
+  .from("about_us")
+  .select("*")
+  .eq("is_active", true)
+  .order("order", { ascending: true })
+  .single();
+
+// Fallback data si no hay contenido en Supabase
+const aboutContent = aboutData || {
+  title: "SOBRE NOSOTROS",
+  description: "Contenido no disponible",
+  image_url:
+    "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?w=800&q=80",
+  image_alt: "Sobre Nosotros",
+};
+
+// Parsear descripción para separar subtítulo del resto
+const lines = aboutContent.description?.split("\n\n") || [];
+const subtitle = lines[0] || "";
+const restContent = lines.slice(1).join("\n\n") || "";
 ---
 
-<section id="about" class="py-20 px-4 bg-gray-50 dark:bg-[#0a0a0a] transition-colors duration-300">
+<section
+  id="about"
+  class="py-20 px-4 bg-[#f5f5f5] dark:bg-[#0a0a0a] transition-colors duration-300"
+>
   <div class="max-w-7xl mx-auto">
-    <div class="text-center p-12 border-2 border-dashed border-[#000000]/20 dark:border-white/20 rounded-lg">
-      <p class="text-2xl text-[#000000]/50 dark:text-gray-500 italic">
-        📖 Aquí va el About Us
-      </p>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Imagen -->
+      <div
+        class="order-2 lg:order-1 animate-fade-in flex justify-center lg:justify-start"
+        style="animation-delay: 0.2s; opacity: 0; animation-fill-mode: forwards;"
+      >
+        <div
+          class="relative rounded-lg overflow-hidden shadow-2xl max-w-md w-full"
+        >
+          <img
+            src={aboutContent.image_url}
+            alt={aboutContent.image_alt || aboutContent.title}
+            class="w-full h-auto object-contain"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+      <!-- Contenido -->
+      <div
+        class="order-1 lg:order-2 animate-fade-in"
+        style="animation-delay: 0.4s; opacity: 0; animation-fill-mode: forwards;"
+      >
+        <!-- Título con líneas decorativas -->
+        <div class="flex items-center gap-4 mb-6">
+          <div class="flex-1 h-[2px] bg-black dark:bg-white"></div>
+          <h2
+            class="text-3xl md:text-4xl font-bold text-black dark:text-white tracking-wider"
+          >
+            {aboutContent.title}
+          </h2>
+          <div class="flex-1 h-[2px] bg-black dark:bg-white"></div>
+        </div>
+
+        <!-- Subtítulo -->
+        {
+          subtitle && (
+            <p class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl mx-auto">
+              {subtitle}
+            </p>
+          )
+        }
+
+        <!-- Descripción -->
+        <div class="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed">
+          {
+            restContent
+              .split(".")
+              .filter((sentence: string) => sentence.trim())
+              .map((sentence: string) => (
+                <p class="text-base md:text-lg">{sentence.trim()}.</p>
+              ))
+          }
+        </div>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.8s ease-out;
+  }
+</style>

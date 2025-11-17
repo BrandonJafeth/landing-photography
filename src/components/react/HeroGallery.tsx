@@ -45,7 +45,7 @@ export const HeroGallery: FC<HeroGalleryProps> = ({ images }) => {
             <img
               src={image.url}
               alt={image.alt}
-              className="w-full h-full object-center "
+              className="w-full h-full object-cover"
               loading={index === 0 ? 'eager' : 'lazy'}
             />
             {/* Overlay oscuro para mejorar legibilidad del texto */}
