@@ -46,7 +46,7 @@ const activeServices: Service[] = services || []
           <!-- Contenido -->
           <div class="p-6">
             <!-- Título -->
-            <h3 class="text-lg md:text-2xl font-semibold text-[#000000] dark:text-white uppercase  mb-2">
+            <h3 class="text-lg md:text-1xl font-semibold text-[#000000] dark:text-white uppercase  mb-2">
               {service.title}
             </h3>
 
@@ -60,10 +60,10 @@ const activeServices: Service[] = services || []
 
             <!-- Botón CTA -->
             <a
-              href={service.cta_link || '/contacto'}
+              href={`/servicios/${service.slug}`}
               class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-[#000000] dark:border-white text-[#000000] dark:text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-[#000000] hover:text-white dark:hover:bg-white dark:hover:text-[#000000] group/btn"
             >
-              <span>{service.cta_text}</span>
+              <span>{service.cta_text || 'VER MÁS'}</span>
               <svg 
                 class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" 
                 fill="none" 

@@ -8,7 +8,7 @@ const { data: featuredImages, error } = await supabase
   .eq('is_visible', true)
   .eq('is_featured', true)
   .order('featured_order', { ascending: true })
-  .limit(8)
+  .limit(7)
 
 if (error) {
   console.error('Error fetching portfolio images:', error)
