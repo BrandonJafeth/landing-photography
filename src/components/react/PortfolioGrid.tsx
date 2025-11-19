@@ -198,6 +198,123 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
           <span className="font-bold text-black dark:text-white">{images.length}</span> imágenes
         </p>
       </div>
+
+      {/* Modal de imagen */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-sm"
+          onClick={closeModal}
+        >
+          {/* Botón cerrar */}
+          <button
+            onClick={closeModal}
+            className="absolute top-4 right-4 z-50 p-2 text-white hover:bg-white/10 rounded-full transition-colors"
+            aria-label="Cerrar"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-8 w-8"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Botón anterior */}
+          {filteredImages.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToPrevious();
+              }}
+              className="absolute left-4 z-50 p-3 text-white hover:bg-white/10 rounded-full transition-colors"
+              aria-label="Imagen anterior"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M15 19l-7-7 7-7"
+                />
+              </svg>
+            </button>
+          )}
+
+          {/* Botón siguiente */}
+          {filteredImages.length > 1 && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                goToNext();
+              }}
+              className="absolute right-4 z-50 p-3 text-white hover:bg-white/10 rounded-full transition-colors"
+              aria-label="Imagen siguiente"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          )}
+
+          {/* Contenedor de imagen */}
+          <div
+            className="relative max-w-7xl max-h-[90vh] mx-4"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={selectedImage.image_url}
+              alt={selectedImage.alt || selectedImage.title || 'Portfolio image'}
+              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+            />
+
+            {/* Información de la imagen */}
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent rounded-b-lg">
+              {selectedImage.title && (
+                <h3 className="text-white font-bold text-xl mb-2">
+                  {selectedImage.title}
+                </h3>
+              )}
+              <div className="flex items-center justify-between">
+                {selectedImage.category && (
+                  <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-md rounded-md text-black text-xs font-bold tracking-widest">
+                    {selectedImage.category.name.toUpperCase()}
+                  </span>
+                )}
+                {filteredImages.length > 1 && (
+                  <span className="text-white text-sm">
+                    {currentIndex + 1} / {filteredImages.length}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
