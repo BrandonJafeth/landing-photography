@@ -23,7 +23,7 @@ const renderStars = (rating: number) => {
 }
 ---
 
-<section id="testimonials" class="py-20 px-4 bg-white dark:bg-black/90 transition-colors duration-300">
+<section id="testimonials" class="py-12 px-4 bg-white dark:bg-black/90 transition-colors duration-300">
   <div class="max-w-7xl mx-auto">
     <!-- Título de la sección -->
     <div class="text-center mb-16">
@@ -41,7 +41,7 @@ const renderStars = (rating: number) => {
       <div id="testimonials-scroll" class="overflow-x-auto pb-8 scrollbar-hide cursor-grab active:cursor-grabbing">
         <div class="flex gap-8 px-4 min-w-max">
           {activeTestimonials.map((testimonial) => (
-            <div class="relative w-[380px] flex-shrink-0">
+            <div class="relative w-[calc(100vw-2rem)] md:w-[380px] flex-shrink-0">
               <!-- Cinta adhesiva horizontal (estilo polaroid) -->
               <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-24 h-8 bg-[#d4c5a0]/70 dark:bg-white/20 rotate-0 z-10 shadow-md"
                 style="clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);">
