@@ -90,3 +90,28 @@ export interface SiteContent {
   created_at: string
   updated_at: string
 }
+
+export interface ImageCategory {
+  id: string
+  name: string
+  description: string | null
+  created_at: string
+}
+
+export interface PortfolioImage {
+  id: string
+  image_url: string
+  thumbnail_url: string | null
+  title: string | null
+  alt: string | null
+  category_id: string | null
+  category?: ImageCategory | null
+  is_featured: boolean
+  featured_order: number | null
+  order: number
+  is_visible: boolean
+  link_url: string | null
+  service_id: string | null
+  created_at: string
+  updated_at: string
+}

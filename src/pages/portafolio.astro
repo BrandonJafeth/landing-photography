@@ -1,14 +1,90 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import PortfolioGrid from "../components/react/PortfolioGrid";
+import { supabase } from "../lib/supabase";
+
+// Obtener todas las categorías
+const { data: categories } = await supabase
+  .from("image_categories")
+  .select("*")
+  .order("name", { ascending: true });
+
+// Obtener todas las imágenes visibles del portafolio con su categoría
+const { data: portfolioImages } = await supabase
+  .from("portfolio_images")
+  .select(
+    `
+    *,
+    category:image_categories(id, name, description)
+  `
+  )
+  .eq("is_visible", true)
+  .order("order", { ascending: true });
+
+const images = portfolioImages || [];
+const allCategories = categories || [];
 ---
 
-<Layout title="Portafolio">
-	<div class="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black/98 px-4 transition-colors duration-300">
-		<h1 class="text-4xl md:text-6xl font-bold text-black/98 dark:text-white text-center">
-			Mi Portafolio
-		</h1>
-		<p class="mt-4 text-lg md:text-xl text-black/98 dark:text-gray-400 text-center max-w-2xl">
-			Explora mi trabajo y proyectos más destacados.
-		</p>
-	</div>
+<Layout title="Portafolio - Mi Trabajo Fotográfico">
+  <div
+    class="min-h-screen bg-white dark:bg-black/98 transition-colors duration-300"
+  >
+    {/* Hero Section */}
+    <div class="relative py-12">
+      <div class="container mx-auto px-4">
+        <div class="text-center max-w-4xl mx-auto">
+          <h1
+            class="text-2xl md:text-3xl font-semibold text-[#000000] dark:text-white mb-2"
+          >
+            Mi Portafolio
+          </h1>
+          <div class="w-16 h-[1px] bg-[#000000] dark:bg-white mx-auto mb-6">
+          </div>
+          <p
+            class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl tracking-wide mx-auto"
+          >
+            Explora mi colección de trabajos fotográficos
+          </p>
+        </div>
+      </div>
+    </div>
+
+    {/* Portfolio Grid Section */}
+    <div class="container mx-auto px-4 py-16 md:py-8">
+      {
+        images.length > 0 ? (
+          <PortfolioGrid
+            client:load
+            images={images}
+            categories={allCategories}
+          />
+        ) : (
+          <div class="text-center py-20">
+            <div class="inline-block p-8 bg-gray-100 dark:bg-gray-900 rounded-2xl">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-16 w-16 mx-auto text-gray-400 dark:text-gray-600 mb-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                Portafolio en construcción
+              </h3>
+              <p class="text-gray-500 dark:text-gray-400">
+                Pronto agregaré nuevas imágenes increíbles
+              </p>
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </div>
 </Layout>
