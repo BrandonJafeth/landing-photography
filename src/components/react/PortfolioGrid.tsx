@@ -74,7 +74,7 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!selectedImage) return;
-      
+
       if (e.key === 'Escape') closeModal();
       if (e.key === 'ArrowLeft') goToPrevious();
       if (e.key === 'ArrowRight') goToNext();
@@ -93,10 +93,9 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
           onClick={() => setSelectedCategory('all')}
           className={`
             px-5 py-2 rounded-full text-xs font-semibold hover:cursor-pointer hover:scale-105 tracking-wider transition-all duration-300
-            ${
-              selectedCategory === 'all'
-                ? 'bg-black/95 dark:bg-white/95 text-white dark:text-black'
-                : 'bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
+            ${selectedCategory === 'all'
+              ? 'bg-black/95 dark:bg-white/95 text-white dark:text-black'
+              : 'bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
             }
           `}
         >
@@ -110,10 +109,9 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
             onClick={() => setSelectedCategory(category.id)}
             className={`
               px-5 py-2 rounded-full text-xs font-semibold tracking-wider hover:cursor-pointer hover:scale-105 transition-all duration-300
-              ${
-                selectedCategory === category.id
-                  ? 'bg-black/95 dark:bg-white/98 text-white dark:text-black'
-                  : 'bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
+              ${selectedCategory === category.id
+                ? 'bg-black/95 dark:bg-white/98 text-white dark:text-black'
+                : 'bg-transparent border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-black dark:hover:border-white hover:text-black dark:hover:text-white'
               }
             `}
           >
@@ -124,17 +122,16 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
 
       {/* Grid de imágenes */}
       {filteredImages.length > 0 ? (
-        <div 
+        <div
           className={`
             grid gap-4 auto-rows-[300px]
-            ${
-              filteredImages.length === 1
-                ? 'grid-cols-1 max-w-2xl mx-auto'
-                : filteredImages.length === 2
+            ${filteredImages.length === 1
+              ? 'grid-cols-1 max-w-2xl mx-auto'
+              : filteredImages.length === 2
                 ? 'grid-cols-1 md:grid-cols-2'
                 : filteredImages.length === 3
-                ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
-                : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
+                  ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3'
+                  : 'grid-cols-2 md:grid-cols-3 lg:grid-cols-4'
             }
           `}
         >
@@ -144,11 +141,10 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
               onClick={() => openModal(image, index)}
               className={`
                 group relative overflow-hidden rounded-lg bg-gray-100 dark:bg-gray-900
-                transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer
-                ${
-                  filteredImages.length === 1
-                    ? 'row-span-2'
-                    : index === 0 && filteredImages.length >= 6
+                transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer
+                ${filteredImages.length === 1
+                  ? 'row-span-2'
+                  : index === 0 && filteredImages.length >= 6
                     ? 'col-span-2 row-span-2'
                     : ''
                 }

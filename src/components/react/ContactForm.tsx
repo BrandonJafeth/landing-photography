@@ -108,7 +108,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white dark:bg-[#0a0a0a] border-2 border-[#000000] dark:border-white rounded-3xl p-8 md:p-10"
+      className="bg-white dark:bg-[#0a0a0a] border border-[#000000] dark:border-white rounded-3xl p-8 md:p-10"
     >
       {/* Nombre Completo */}
       <div className="mb-6">
@@ -295,11 +295,10 @@ export default function ContactForm() {
       {/* Status Message */}
       {submitStatus.type && (
         <div
-          className={`mb-6 p-4 rounded-lg ${
-            submitStatus.type === 'success'
+          className={`mb-6 p-4 rounded-lg ${submitStatus.type === 'success'
               ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
               : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'
-          }`}
+            }`}
         >
           {submitStatus.message}
         </div>
@@ -355,7 +354,7 @@ export default function ContactForm() {
           <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
             <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
           </svg>
-          +506 1234-5678
+          +506 8351-8022
         </a>
       </div>
     </form>
