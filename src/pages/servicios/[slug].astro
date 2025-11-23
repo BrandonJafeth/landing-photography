@@ -2,6 +2,7 @@
 import Layout from "@/layouts/Layout.astro";
 import { supabase } from "@/lib/supabase";
 import type { GetStaticPaths } from "astro";
+import ServiceContactForm from "@/components/react/ServiceContactForm";
 
 export const getStaticPaths = (async () => {
   const { data: services, error } = await supabase
@@ -216,101 +217,7 @@ const galleryImages = portfolioImages || [];
                 </p>
               </div>
 
-              <form class="space-y-5">
-                <!-- Nombre completo -->
-                <div>
-                  <label
-                    for="name"
-                    class="block text-sm font-medium text-[#000000] dark:text-white mb-2"
-                  >
-                    Nombre completo
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    required
-                    class="w-full px-4 py-2.5 border border-[#000000]/20 dark:border-white/20 rounded-lg bg-transparent text-[#000000] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#000000] dark:focus:ring-white"
-                    placeholder="Tu nombre"
-                  />
-                </div>
-
-                <!-- Email -->
-                <div>
-                  <label
-                    for="email"
-                    class="block text-sm font-medium text-[#000000] dark:text-white mb-2"
-                  >
-                    Correo electrónico
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    required
-                    class="w-full px-4 py-2.5 border border-[#000000]/20 dark:border-white/20 rounded-lg bg-transparent text-[#000000] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#000000] dark:focus:ring-white"
-                    placeholder="tu@email.com"
-                  />
-                </div>
-
-                <!-- Teléfono -->
-                <div>
-                  <label
-                    for="phone"
-                    class="block text-sm font-medium text-[#000000] dark:text-white mb-2"
-                  >
-                    Teléfono
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    class="w-full px-4 py-2.5 border border-[#000000]/20 dark:border-white/20 rounded-lg bg-transparent text-[#000000] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#000000] dark:focus:ring-white"
-                    placeholder="+506 1234-5678"
-                  />
-                </div>
-
-                <!-- Fecha del evento -->
-                <div>
-                  <label
-                    for="event-date"
-                    class="block text-sm font-medium text-[#000000] dark:text-white mb-2"
-                  >
-                    Fecha del evento
-                  </label>
-                  <input
-                    type="date"
-                    id="event-date"
-                    name="event-date"
-                    class="w-full px-4 py-2.5 border border-[#000000]/20 dark:border-white/20 rounded-lg bg-transparent text-[#000000] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#000000] dark:focus:ring-white"
-                  />
-                </div>
-
-                <!-- Mensaje -->
-                <div>
-                  <label
-                    for="message"
-                    class="block text-sm font-medium text-[#000000] dark:text-white mb-2"
-                  >
-                    Mensaje
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows="3"
-                    required
-                    class="w-full px-4 py-2.5 border border-[#000000]/20 dark:border-white/20 rounded-lg bg-transparent text-[#000000] dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-[#000000] dark:focus:ring-white resize-none"
-                    placeholder="Cuéntanos más sobre tu evento..."></textarea>
-                </div>
-
-                <!-- Botón de envío -->
-                <button
-                  type="submit"
-                  class="w-full px-6 py-3 bg-[#000000] dark:bg-white text-white dark:text-[#000000] font-medium text-sm rounded-lg transition-all duration-300 hover:scale-105 hover:cursor-pointer hover:bg-[#000000]/80 dark:hover:bg-white/90"
-                >
-                  SOLICITAR INFORMACIÓN
-                </button>
-              </form>
+              <ServiceContactForm client:visible serviceName={service.title} />
             </div>
           </div>
         </div>

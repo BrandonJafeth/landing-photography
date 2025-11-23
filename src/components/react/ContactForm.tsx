@@ -108,7 +108,7 @@ export default function ContactForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white dark:bg-[#0a0a0a] border border-[#000000] dark:border-white rounded-3xl p-8 md:p-10"
+      className="bg-white dark:bg-[#0a0a0a] border border-[#000000] dark:border-white rounded-2xl p-6 md:p-8 shadow-sm"
     >
       {/* Nombre Completo */}
       <div className="mb-6">
@@ -296,8 +296,8 @@ export default function ContactForm() {
       {submitStatus.type && (
         <div
           className={`mb-6 p-4 rounded-lg ${submitStatus.type === 'success'
-              ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
-              : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'
+            ? 'bg-green-50 dark:bg-green-900/20 text-green-700 dark:text-green-400'
+            : 'bg-red-50 dark:bg-red-900/20 text-red-700 dark:text-red-400'
             }`}
         >
           {submitStatus.message}

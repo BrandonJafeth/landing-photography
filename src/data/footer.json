@@ -41,12 +41,8 @@
       "href": "/sobre-mi"
     },
     {
-      "label": "Testimonios",
-      "href": "/testimonios"
-    },
-    {
-      "label": "Contacto",
-      "href": "/contacto"
+      "label": "Servicios",
+      "href": "/servicios"
     }
   ],
   "contact": {
@@ -58,17 +54,17 @@
   "social": [
     {
       "name": "Instagram",
-      "href": "https://instagram.com/gadeaiso",
+      "href": "https://www.instagram.com/joelgadea_",
       "icon": "instagram"
     },
     {
       "name": "Facebook",
-      "href": "https://facebook.com/gadeaiso",
+      "href": "https://www.facebook.com/profile.php?id=100073611974767",
       "icon": "facebook"
     },
     {
       "name": "WhatsApp",
-      "href": "https://wa.me/50612345678",
+      "href": "https://wa.me/50683518022",
       "icon": "whatsapp"
     },
     {

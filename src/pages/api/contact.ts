@@ -83,51 +83,73 @@ export const POST: APIRoute = async ({ request }) => {
               <head>
                 <meta charset="utf-8">
                 <style>
-                  body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                  .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                  .header { background: #000; color: white; padding: 30px 20px; text-align: center; }
-                  .content { background: #f9f9f9; padding: 30px; }
-                  .button { display: inline-block; background: #000; color: white; padding: 12px 30px; text-decoration: none; margin: 20px 0; }
-                  .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
+                  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; }
+                  .container { max-width: 600px; margin: 0 auto; background: #ffffff; }
+                  .header { background: #000000; padding: 40px 20px; text-align: center; }
+                  .header h1 { color: #ffffff; margin: 0; font-size: 24px; letter-spacing: 2px; font-weight: 300; text-transform: uppercase; }
+                  .content { padding: 40px 30px; }
+                  .greeting { font-size: 18px; margin-bottom: 20px; }
+                  .summary-box { background: #f9f9f9; padding: 20px; margin: 30px 0; border-left: 4px solid #000000; }
+                  .summary-item { margin-bottom: 10px; }
+                  .summary-label { font-weight: bold; font-size: 12px; text-transform: uppercase; color: #666; display: block; margin-bottom: 4px; }
+                  .summary-value { font-size: 16px; color: #000; }
+                  .message-box { margin-top: 30px; }
+                  .footer { background: #f5f5f5; padding: 30px; text-align: center; font-size: 12px; color: #888; }
                 </style>
               </head>
               <body>
                 <div class="container">
                   <div class="header">
-                    <h1>GADEA ISO</h1>
-                    <p>Fotografía Profesional</p>
+                    <h1>Gadea Iso</h1>
                   </div>
                   
                   <div class="content">
-                    <h2>¡Hola ${name}!</h2>
-                    <p>Gracias por contactarnos. Hemos recibido tu solicitud para <strong>${serviceType}</strong>.</p>
+                    <div class="greeting">Hola ${name},</div>
                     
-                    <p>Nos pondremos en contacto contigo en las próximas 24 horas para discutir los detalles de tu evento${eventDate ? ` programado para el ${new Date(eventDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}` : ''}.</p>
+                    <p>Gracias por ponerte en contacto con nosotros. Hemos recibido correctamente tu solicitud para el servicio de <strong>${serviceType}</strong>.</p>
                     
-                    <p><strong>Resumen de tu solicitud:</strong></p>
-                    <ul>
-                      <li><strong>Servicio:</strong> ${serviceType}</li>
-                      ${eventDate ? `<li><strong>Fecha:</strong> ${new Date(eventDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</li>` : ''}
-                      <li><strong>Email:</strong> ${email}</li>
-                      ${phone ? `<li><strong>Teléfono:</strong> ${phone}</li>` : ''}
-                    </ul>
+                    <p>Nuestro equipo revisará tu información y nos pondremos en contacto contigo en un plazo máximo de 24 horas para conversar sobre los detalles de tu evento.</p>
                     
-                    <p><strong>Tu mensaje:</strong></p>
-                    <p style="background: white; padding: 15px; border-left: 4px solid #000;">${message}</p>
+                    <div class="summary-box">
+                      <div class="summary-item">
+                        <span class="summary-label">Servicio Solicitado</span>
+                        <div class="summary-value">${serviceType}</div>
+                      </div>
+                      
+                      ${eventDate ? `
+                      <div class="summary-item">
+                        <span class="summary-label">Fecha del Evento</span>
+                        <div class="summary-value">${new Date(eventDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                      </div>
+                      ` : ''}
+                      
+                      <div class="summary-item">
+                        <span class="summary-label">Email de Contacto</span>
+                        <div class="summary-value">${email}</div>
+                      </div>
+                      
+                      ${phone ? `
+                      <div class="summary-item">
+                        <span class="summary-label">Teléfono</span>
+                        <div class="summary-value">${phone}</div>
+                      </div>
+                      ` : ''}
+                    </div>
                     
-                    <p>Si tienes alguna pregunta urgente, no dudes en llamarnos al <strong>+506 1234-5678</strong></p>
+                    <div class="message-box">
+                      <p><strong>Tu mensaje:</strong></p>
+                      <p style="color: #555; font-style: italic;">"${message}"</p>
+                    </div>
                     
-                    <p>¡Esperamos trabajar contigo pronto!</p>
-                    
-                    <p style="margin-top: 30px;">
-                      Saludos,<br>
+                    <p style="margin-top: 40px;">
+                      Atentamente,<br>
                       <strong>Equipo Gadea Iso</strong>
                     </p>
                   </div>
                   
                   <div class="footer">
-                    <p>Este es un email automático, por favor no respondas a este mensaje.</p>
-                    <p>© 2025 Gadea Iso - Fotografía Profesional</p>
+                    <p>&copy; ${new Date().getFullYear()} Gadea Iso. Todos los derechos reservados.</p>
+                    <p>Este es un correo automático, por favor no responder directamente a esta dirección.</p>
                   </div>
                 </div>
               </body>
@@ -158,85 +180,69 @@ export const POST: APIRoute = async ({ request }) => {
               <head>
                 <meta charset="utf-8">
                 <style>
-                  body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-                  .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-                  .header { background: #000; color: white; padding: 20px; text-align: center; }
-                  .content { background: #f9f9f9; padding: 30px; }
-                  .field { margin-bottom: 20px; }
-                  .label { font-weight: bold; color: #666; font-size: 12px; text-transform: uppercase; }
-                  .value { margin-top: 5px; font-size: 16px; background: white; padding: 10px; border-left: 3px solid #000; }
-                  .footer { text-align: center; padding: 20px; color: #999; font-size: 12px; }
-                  .urgent { background: #ff9800; color: white; padding: 10px; text-align: center; font-weight: bold; }
+                  body { font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0; background-color: #f5f5f5; }
+                  .container { max-width: 600px; margin: 40px auto; background: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+                  .header { background: #000000; padding: 40px 20px; text-align: center; }
+                  .header h1 { color: #ffffff; margin: 0; font-size: 22px; font-weight: 500; letter-spacing: 1px; }
+                  .meta { color: #888888; font-size: 12px; margin-top: 8px; text-transform: uppercase; letter-spacing: 1px; }
+                  .content { padding: 40px 30px; text-align: left; }
+                  .section { margin-bottom: 30px; }
+                  .label { font-size: 11px; text-transform: uppercase; letter-spacing: 2px; color: #999; margin-bottom: 8px; font-weight: 600; }
+                  .value { font-size: 16px; color: #000; font-weight: 400; }
+                  .value a { color: #000; text-decoration: none; border-bottom: 1px dotted #999; }
+                  .message-block { background: #f9f9f9; padding: 25px; border-radius: 4px; margin-top: 10px; text-align: left; font-size: 15px; color: #444; }
+                  .urgent-badge { background: #000; color: #fff; display: inline-block; padding: 6px 12px; font-size: 11px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; border-radius: 4px; margin-bottom: 30px; }
+                  .footer { background: #f9f9f9; padding: 20px; font-size: 11px; color: #aaa; text-align: center; border-top: 1px solid #eee; }
                 </style>
               </head>
               <body>
                 <div class="container">
                   <div class="header">
-                    <h1>🔔 NUEVA SOLICITUD</h1>
-                    <p>Formulario de Contacto - Gadea Iso</p>
+                    <h1>Nueva Solicitud</h1>
+                    <div class="meta">${new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</div>
                   </div>
                   
-                  ${eventDate && new Date(eventDate) < new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) ? '<div class="urgent">⚠️ EVENTO PRÓXIMO - Contactar pronto</div>' : ''}
-                  
                   <div class="content">
-                    <div class="field">
-                      <div class="label">Nombre Completo</div>
+                    ${eventDate && new Date(eventDate) < new Date(Date.now() + 30 * 24 * 60 * 60 * 1000) ? '<div class="urgent-badge">Evento Próximo</div>' : ''}
+                    
+                    <div class="section">
+                      <div class="label">Cliente</div>
                       <div class="value">${name}</div>
                     </div>
                     
-                    <div class="field">
-                      <div class="label">Email</div>
-                      <div class="value"><a href="mailto:${email}">${email}</a></div>
+                    <div class="section">
+                      <div class="label">Contacto</div>
+                      <div class="value">
+                        <a href="mailto:${email}">${email}</a>
+                        ${phone ? `<br><div style="margin-top:5px"><a href="tel:${phone}">${phone}</a></div>` : ''}
+                      </div>
                     </div>
                     
-                    ${phone ? `
-                    <div class="field">
-                      <div class="label">Teléfono</div>
-                      <div class="value"><a href="tel:${phone}">${phone}</a></div>
-                    </div>
-                    ` : ''}
-                    
-                    <div class="field">
-                      <div class="label">Tipo de Servicio</div>
-                      <div class="value">${serviceType}</div>
-                    </div>
-                    
-                    ${eventDate ? `
-                    <div class="field">
-                      <div class="label">Fecha del Evento</div>
-                      <div class="value">${new Date(eventDate).toLocaleDateString('es-ES', { 
-                        year: 'numeric', 
-                        month: 'long', 
-                        day: 'numeric' 
-                      })}</div>
-                    </div>
-                    ` : ''}
-                    
-                    <div class="field">
-                      <div class="label">Mensaje del Cliente</div>
-                      <div class="value">${message}</div>
+                    <div class="section">
+                      <div class="label">Servicio Solicitado</div>
+                      <div class="value">
+                        ${serviceType}
+                        ${eventDate ? `<div style="font-size: 14px; color: #666; margin-top: 5px;">${new Date(eventDate).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</div>` : ''}
+                      </div>
                     </div>
                     
                     ${howFoundUs ? `
-                    <div class="field">
-                      <div class="label">¿Cómo nos conoció?</div>
-                      <div class="value">${howFoundUs}</div>
+                    <div class="section">
+                      <div class="label">Fuente</div>
+                      <div class="value" style="font-size: 16px;">${howFoundUs}</div>
                     </div>
                     ` : ''}
                     
-                    <div style="margin-top: 30px; padding: 20px; background: #e3f2fd; border-left: 4px solid #2196f3;">
-                      <strong>💡 Acciones sugeridas:</strong>
-                      <ul>
-                        <li>Responder al cliente en las próximas 24 horas</li>
-                        <li>Verificar disponibilidad para la fecha solicitada</li>
-                        <li>Preparar cotización según el servicio</li>
-                      </ul>
+                    <div class="section" style="margin-top: 40px;">
+                      <div class="label">Mensaje del Cliente</div>
+                      <div class="message-block">
+                        "${message}"
+                      </div>
                     </div>
                   </div>
                   
                   <div class="footer">
-                    <p>📧 Este mensaje fue enviado desde el formulario de contacto de gadeaiso.com</p>
-                    <p>🕐 Recibido: ${new Date().toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'short' })}</p>
+                    Sistema de Notificaciones Gadea Iso &bull; ID: ${contactMessage?.id || 'N/A'}
                   </div>
                 </div>
               </body>
