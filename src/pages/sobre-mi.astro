@@ -1,14 +1,29 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import HeroAbout from "../components/about/HeroAbout.astro";
+import AboutUsSection from "../components/about/AboutUsSection";
+import PhilosophySection from "../components/about/PhilosophySection.astro";
+import SpecialtiesSection from "../components/about/SpecialtiesSection.astro";
+import ValuesSection from "../components/about/ValuesSection.astro";
+import CTASection from "../components/about/CTASection.astro";
 ---
 
-<Layout title="Sobre mí">
-	<div class="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black px-4 transition-colors duration-300">
-		<h1 class="text-4xl md:text-6xl font-bold text-black/98 dark:text-white text-center">
-			Sobre mí
-		</h1>
-		<p class="mt-4 text-lg md:text-xl text-[#000000]/70 dark:text-gray-400 text-center max-w-2xl">
-			Conoce mi historia y mi pasión por la fotografía.
-		</p>
-	</div>
+<Layout title="Sobre Mí - Joel Gadea">
+  <main class="bg-white dark:bg-[#000000] transition-colors duration-300">
+
+    <!-- Section: Sobre Nosotros con Ver más/Ver menos -->
+    <AboutUsSection client:load />
+
+    <!-- Section: Mi Filosofía Visual -->
+    <PhilosophySection />
+
+    <!-- Section: Especialidades -->
+    <SpecialtiesSection />
+
+    <!-- Section: Mis Valores -->
+    <ValuesSection />
+
+    <!-- Section: CTA Reserva -->
+    <CTASection />
+  </main>
 </Layout>
