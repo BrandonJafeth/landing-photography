@@ -32,10 +32,10 @@ export default function AboutUsSection() {
           <div className="order-1 lg:order-2 px-4">
             <div className="space-y-6 text-center">
               <div>
-                <p className="text-3xl md:text-4xl font-semibold text-[#000000]/60 dark:text-white uppercase mb-4">
+                <p className="text-3xl md:text-4xl font-semibold text-black dark:text-white uppercase mb-4">
                   SOBRE NOSOTROS
                 </p>
-                <h2 className="text-lg font-semibold text-[#000000] dark:text-white/80 leading-tight">
+                <h2 className="text-lg font-semibold text-[#000000]/75 dark:text-white/80 leading-tight">
                   Cada foto es un reflejo auténtico de tu vida
                 </h2>
               </div>
