@@ -45,17 +45,10 @@ const activeServices = services || [];
           activeServices.length > 0 ? (
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {activeServices.map((service, index) => (
-                <div
-                  class="service-card group relative bg-white dark:bg-[#0a0a0a] border border-black border-3 dark:border-white overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
-                  style={`animation-delay: ${index * 0.1}s;`}
-                >
-                  {/* Badge numerado */}
-                  <div class="absolute top-4 right-4 z-10 w-12 h-12 bg-white dark:bg-[#0a0a0a] border-2 border-[#000000] dark:border-white rounded-full flex items-center justify-center shadow-lg">
-                    <span class="text-lg font-bold text-[#000000] dark:text-white">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
+    <div
+  class="service-card group relative bg-white dark:bg-[#0a0a0a] border border-black border-3 dark:border-white overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+  style={`animation-delay: ${index * 0.1}s;`}
+>
                   {/* Imagen */}
                   <div class="relative h-64 overflow-hidden">
                     <img
