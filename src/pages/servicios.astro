@@ -1,14 +1,220 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import { supabase } from "@/lib/supabase";
+
+// Obtener servicios activos desde Supabase
+const { data: services, error } = await supabase
+  .from("services")
+  .select("*")
+  .eq("is_active", true)
+  .order("order", { ascending: true });
+
+if (error) {
+  console.error("Error fetching services:", error);
+}
+
+const activeServices = services || [];
 ---
 
-<Layout title="Servicios">
-	<div class="flex flex-col items-center justify-center min-h-screen bg-white dark:bg-black/98 px-4 transition-colors duration-300">
-		<h1 class="text-4xl md:text-6xl font-bold text-[#000000] dark:text-white text-center">
+<Layout title="Servicios - Joel Gadea Fotografía">
+  <main class="bg-white dark:bg-[#000000] transition-colors duration-300">
+    <!-- Hero Section -->
+    <section class="py-16 md:py-24">
+      <div class="max-w-7xl mx-auto px-4">
+        <div class="text-center max-w-3xl mx-auto">
+          <h1
+            class="text-4xl md:text-5xl font-semibold text-[#000000] dark:text-white mb-6"
+          >
 			Nuestros Servicios
-		</h1>
-		<p class="mt-4 text-lg md:text-xl text-[#000000]/70 dark:text-gray-400 text-center max-w-2xl">
-			Ofrecemos servicios profesionales de fotografía para todo tipo de eventos y ocasiones.
-		</p>
-	</div>
+          </h1>
+          <p
+            class="text-lg text-[#000000]/70 dark:text-gray-400 tracking-wide leading-relaxed"
+          >
+            Explora las experiencias fotográficas que puedo crear para ti. Cada
+            proyecto es único y diseñado para capturar la esencia de tus
+            momentos más especiales.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grid de Servicios -->
+    <section class="pb-20 md:pb-32">
+      <div class="max-w-7xl mx-auto px-4">
+        {
+          activeServices.length > 0 ? (
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {activeServices.map((service, index) => (
+                <div
+                  class="service-card group relative bg-white dark:bg-[#0a0a0a] border border-black border-3 dark:border-white overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1"
+                  style={`animation-delay: ${index * 0.1}s;`}
+                >
+                  {/* Badge numerado */}
+                  <div class="absolute top-4 right-4 z-10 w-12 h-12 bg-white dark:bg-[#0a0a0a] border-2 border-[#000000] dark:border-white rounded-full flex items-center justify-center shadow-lg">
+                    <span class="text-lg font-bold text-[#000000] dark:text-white">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+
+                  {/* Imagen */}
+                  <div class="relative h-64 overflow-hidden">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+                  </div>
+
+                  {/* Contenido */}
+                  <div class="p-6 space-y-4">
+                    {/* Título */}
+                    <h3 class="text-lg font-semibold text-[#000000] dark:text-white uppercase mb-2">
+                      {service.title}
+                    </h3>
+
+                    {/* Descripción */}
+                    <p class="text-sm text-[#000000]/70 dark:text-gray-400 leading-relaxed min-h-[60px]">
+                      {service.description}
+                    </p>
+
+                    {/* Botón */}
+                    <a
+                      href={`/servicios/${service.slug}`}
+                      class="inline-flex items-center gap-2 px-6 py-2.5 border-2 border-[#000000] dark:border-white text-[#000000] dark:text-white text-sm font-medium rounded-lg transition-all duration-300 hover:bg-[#000000] hover:text-white dark:hover:bg-white dark:hover:text-[#000000] group/btn"
+                    >
+                      <span>VER DETALLES</span>
+                      <svg
+                        class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                        />
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div class="text-center py-20">
+              <div class="inline-block p-8 bg-gray-100 dark:bg-gray-900 rounded-2xl">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-16 w-16 mx-auto text-gray-400 dark:text-gray-600 mb-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                <h3 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">
+                  No hay servicios disponibles
+                </h3>
+                <p class="text-gray-500 dark:text-gray-400">
+                  Pronto agregaremos nuevos servicios
+                </p>
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+  <!-- CTA Section -->
+<section class="mb-18 mr-4 ml-4 bg-white dark:bg-black">
+  <div class="max-w-5xl mx-auto px-4">
+
+    <!-- Card CTA -->
+    <div
+      class="mt-4 md:mt-8 relative overflow-hidden rounded-3xl border border-gray-200/80 dark:border-white/10 bg-white/90 dark:bg-white/[0.03] shadow-[0_18px_55px_rgba(0,0,0,0.06)] dark:shadow-[0_18px_55px_rgba(0,0,0,0.75)]"
+    >
+      <!-- Degradado sutil de fondo -->
+      <div
+        class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(0,0,0,0.04),_transparent_60%)] dark:bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.06),_transparent_60%)]"
+      ></div>
+
+      <div class="relative px-6 py-10 md:px-16 md:py-14 text-center space-y-6">
+        <p
+          class="text-[11px] md:text-xs font-semibold tracking-[0.35em] text-gray-500 dark:text-gray-400 uppercase"
+        >
+          ¿quieres una sesión personalizada?
+        </p>
+
+        <h2
+          class="text-2xl md:text-4xl font-semibold text-[#000000] dark:text-white leading-tight"
+        >
+          Cada proyecto es único
+        </h2>
+
+        <p
+          class="text-sm md:text-lg text-[#000000]/70 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed"
+        >
+          Cuéntame sobre tu visión y trabajemos juntos para crear algo
+          extraordinario. Me especializo en capturar momentos auténticos que
+          cuenten tu historia única.
+        </p>
+
+        <div class="pt-2">
+          <a
+            href="/#contact"
+            class="inline-flex items-center gap-2 px-8 py-3 md:px-9 md:py-3.5 rounded-lg bg-[#000000] dark:bg-white text-white dark:text-[#000000] text-xs md:text-sm font-medium tracking-[0.18em] uppercase transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
+          >
+            CONTÁCTAME
+            <span class="text-lg leading-none">↗</span>
+          </a>
+        </div>
+
+        <p
+          class="text-[11px] md:text-xs text-gray-500/80 dark:text-gray-400/80"
+        >
+          Respondo personalmente cada mensaje para entender mejor tu historia,
+          tu estilo y lo que quieres transmitir.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+  </main>
 </Layout>
+
+<style>
+  /* Animación de entrada para las cards */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .service-card {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  /* Asegurar transiciones suaves */
+  .service-card img {
+    will-change: transform;
+  }
+
+  .service-card:hover img {
+    transform: scale(1.1);
+  }
+</style>
