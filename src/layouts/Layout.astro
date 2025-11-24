@@ -4,6 +4,7 @@ import Footer from "@/components/layout/Footer.astro";
 import ScrollToTop from "@/components/layout/ScrollToTop.astro";
 import WhatsAppButton from "@/components/layout/WhatsAppButton.astro";
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 
 interface Props {
   title: string;
@@ -21,20 +22,6 @@ const {
 <!doctype html>
 <html lang="es">
   <head>
-    <!-- Theme Script - DEBE ejecutarse INMEDIATAMENTE -->
-    <script is:inline>
-      const theme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-
-      if (theme === "dark" || (!theme && prefersDark)) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    </script>
-
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -48,6 +35,32 @@ const {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://res.cloudinary.com" />
+
+    <!-- ClientRouter para navegación SPA con transiciones -->
+    <ClientRouter />
+
+    <!-- Theme Script - Compatible con ClientRouter -->
+    <script is:inline>
+      // Función para aplicar el tema
+      function applyTheme() {
+        const theme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+
+        if (theme === "dark" || (!theme && prefersDark)) {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+
+      // Aplicar tema inmediatamente
+      applyTheme();
+
+      // Escuchar eventos de navegación de View Transitions
+      document.addEventListener("astro:after-swap", applyTheme);
+    </script>
   </head>
   <body
     class="bg-white text-black/98 dark:text-white dark:bg-black transition-colors duration-300"
