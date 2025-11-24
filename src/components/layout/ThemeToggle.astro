@@ -38,30 +38,39 @@
 </button>
 
 <script>
+  // Función para toggle del tema
+  function toggleTheme() {
+    const isDark = document.documentElement.classList.contains("dark");
+
+    if (isDark) {
+      localStorage.theme = "light";
+      document.documentElement.classList.remove("dark");
+    } else {
+      localStorage.theme = "dark";
+      document.documentElement.classList.add("dark");
+    }
+  }
+
+  // Función para configurar el botón de tema
   function setupThemeToggle() {
     const button = document.getElementById("theme-toggle");
     if (!button) return;
 
-    function toggleTheme() {
-      const isDark = document.documentElement.classList.contains("dark");
-
-      if (isDark) {
-        localStorage.theme = "light";
-        document.documentElement.classList.remove("dark");
-      } else {
-        localStorage.theme = "dark";
-        document.documentElement.classList.add("dark");
-      }
-    }
-
     // Remover listener anterior si existe para evitar duplicados
-    button.removeEventListener("click", toggleTheme);
-    button.addEventListener("click", toggleTheme);
+    const clone = button.cloneNode(true);
+    button.parentNode?.replaceChild(clone, button);
+
+    // Agregar el event listener al nuevo botón
+    clone.addEventListener("click", toggleTheme);
   }
 
-  // Ejecutar al cargar la página
-  setupThemeToggle();
+  // Ejecutar inmediatamente cuando el script se carga (primera vez)
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setupThemeToggle);
+  } else {
+    setupThemeToggle();
+  }
 
-  // Re-ejecutar después de cada navegación con View Transitions
+  // Re-ejecutar después de cada navegación con ClientRouter
   document.addEventListener("astro:page-load", setupThemeToggle);
 </script>
