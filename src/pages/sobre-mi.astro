@@ -1,15 +1,13 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import HeroAbout from "../components/about/HeroAbout.astro";
-import AboutUsSection from "../components/about/AboutUsSection";
 import PhilosophySection from "../components/about/PhilosophySection.astro";
-import SpecialtiesSection from "../components/about/SpecialtiesSection.astro";
 import ValuesSection from "../components/about/ValuesSection.astro";
 import CTASection from "../components/about/CTASection.astro";
+import AboutUsSection from "@/components/about/AboutUsSection.astro";
 ---
 
 <Layout title="Sobre Mí - Joel Gadea">
-  <main class="bg-white dark:bg-[#000000] transition-colors duration-300">
+  <main class="bg-white dark:bg-black transition-colors duration-300">
 
     <!-- Section: Sobre Nosotros con Ver más/Ver menos -->
     <AboutUsSection client:load />

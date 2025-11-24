@@ -1,55 +1,67 @@
-<button 
-  type="button" 
+<button
+  type="button"
   id="theme-toggle"
   class="w-10 h-10 rounded-full border-2 dark:border-white/20 border-[#000000]/20 flex items-center justify-center hover:cursor-pointer dark:text-white text-[#000000] dark:hover:bg-white/10 hover:bg-[#000000]/10 transition-all duration-200 group"
   aria-label="Toggle theme"
 >
   <!-- Sol Icon - Visible en dark mode -->
-  <svg 
-    class="hidden dark:inline w-5 h-5 transition-transform duration-300 group-hover:rotate-60" 
-    fill="none" 
-    stroke="currentColor" 
+  <svg
+    class="hidden dark:inline w-5 h-5 transition-transform duration-300 group-hover:rotate-60"
+    fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
     aria-hidden="true"
   >
-    <path 
-      stroke-linecap="round" 
-      stroke-linejoin="round" 
-      stroke-width="2" 
-      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" 
-    />
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+    ></path>
   </svg>
-  
+
   <!-- Luna Icon - Visible en light mode -->
-  <svg 
-    class="dark:hidden w-5 h-5 transition-transform duration-300 group-hover:rotate-60" 
-    fill="none" 
-    stroke="currentColor" 
+  <svg
+    class="dark:hidden w-5 h-5 transition-transform duration-300 group-hover:rotate-60"
+    fill="none"
+    stroke="currentColor"
     viewBox="0 0 24 24"
     aria-hidden="true"
   >
-    <path 
-      stroke-linecap="round" 
-      stroke-linejoin="round" 
-      stroke-width="2" 
-      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" 
-    />
+    <path
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
+    ></path>
   </svg>
 </button>
 
 <script>
-  function toggleTheme() {
-    const isDark = document.documentElement.classList.contains('dark');
-    
-    if (isDark) {
-      localStorage.theme = 'light';
-      document.documentElement.classList.remove('dark');
-    } else {
-      localStorage.theme = 'dark';
-      document.documentElement.classList.add('dark');
+  function setupThemeToggle() {
+    const button = document.getElementById("theme-toggle");
+    if (!button) return;
+
+    function toggleTheme() {
+      const isDark = document.documentElement.classList.contains("dark");
+
+      if (isDark) {
+        localStorage.theme = "light";
+        document.documentElement.classList.remove("dark");
+      } else {
+        localStorage.theme = "dark";
+        document.documentElement.classList.add("dark");
+      }
     }
+
+    // Remover listener anterior si existe para evitar duplicados
+    button.removeEventListener("click", toggleTheme);
+    button.addEventListener("click", toggleTheme);
   }
 
-  // Event listener
-  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  // Ejecutar al cargar la página
+  setupThemeToggle();
+
+  // Re-ejecutar después de cada navegación con View Transitions
+  document.addEventListener("astro:page-load", setupThemeToggle);
 </script>
