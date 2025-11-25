@@ -122,39 +122,59 @@ const renderStars = (rating: number) => {
 </section>
 
 <script>
-  // Drag to scroll functionality
-  const scrollContainer = document.getElementById('testimonials-scroll');
-  
-  if (scrollContainer) {
-    let isDown = false;
-    let startX: number;
-    let scrollLeft: number;
+  // Estado global para los event listeners
+  let scrollState = {
+    isDown: false,
+    startX: 0,
+    scrollLeft: 0
+  };
 
-    scrollContainer.addEventListener('mousedown', (e) => {
-      isDown = true;
+  // Función para configurar drag to scroll
+  function setupDragScroll() {
+    const scrollContainer = document.getElementById('testimonials-scroll');
+    
+    if (!scrollContainer) return;
+
+    // Limpiar estado
+    scrollState = {
+      isDown: false,
+      startX: 0,
+      scrollLeft: 0
+    };
+
+    scrollContainer.addEventListener('mousedown', (e: MouseEvent) => {
+      scrollState.isDown = true;
       scrollContainer.classList.add('active');
-      startX = e.pageX - scrollContainer.offsetLeft;
-      scrollLeft = scrollContainer.scrollLeft;
+      scrollState.startX = e.pageX - scrollContainer.offsetLeft;
+      scrollState.scrollLeft = scrollContainer.scrollLeft;
     });
 
     scrollContainer.addEventListener('mouseleave', () => {
-      isDown = false;
+      scrollState.isDown = false;
       scrollContainer.classList.remove('active');
     });
 
     scrollContainer.addEventListener('mouseup', () => {
-      isDown = false;
+      scrollState.isDown = false;
       scrollContainer.classList.remove('active');
     });
 
-    scrollContainer.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
+    scrollContainer.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!scrollState.isDown) return;
       e.preventDefault();
       const x = e.pageX - scrollContainer.offsetLeft;
-      const walk = (x - startX) * 2; // Multiplicador para velocidad de scroll
-      scrollContainer.scrollLeft = scrollLeft - walk;
+      const walk = (x - scrollState.startX) * 2;
+      scrollContainer.scrollLeft = scrollState.scrollLeft - walk;
     });
   }
+
+  // Ejecutar en carga inicial
+  setupDragScroll();
+
+  // Re-ejecutar después de navegación con ClientRouter
+  document.addEventListener('astro:page-load', () => {
+    setupDragScroll();
+  });
 </script>
 
 <style>
