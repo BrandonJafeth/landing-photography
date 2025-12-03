@@ -1,6 +1,7 @@
 ---
 import { supabase } from '@/lib/supabase'
 import type { Database } from '@/lib/supabase'
+import { getOptimizedImage } from '@/utils/cloudinary'
 
 type Testimonial = Database['public']['Tables']['testimonials']['Row']
 
@@ -30,7 +31,7 @@ const renderStars = (rating: number) => {
       <h2 class="text-2xl md:text-3xl font-semibold text-[#000000] dark:text-white mb-2">
         TESTIMONIOS
       </h2>
-      <div class="w-16 h-[1px] bg-[#000000] dark:bg-white mx-auto mb-6"></div>
+      <div class="w-16 h-px bg-[#000000] dark:bg-white mx-auto mb-6"></div>
       <p class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl tracking-wide mx-auto">
         Lo que dicen nuestros clientes
       </p>
@@ -41,7 +42,7 @@ const renderStars = (rating: number) => {
       <div id="testimonials-scroll" class="overflow-x-auto pb-8 scrollbar-hide cursor-grab active:cursor-grabbing">
         <div class="flex gap-8 px-4 min-w-max">
           {activeTestimonials.map((testimonial) => (
-            <div class="relative w-[calc(100vw-2rem)] md:w-[380px] flex-shrink-0">
+            <div class="relative w-[calc(100vw-2rem)] md:w-[380px] shrink-0">
               <!-- Cinta adhesiva horizontal (estilo polaroid) -->
               <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-28 h-8 bg-[#d4c5a0]/80 dark:bg-white/20 rotate-0 z-10 drop-shadow-md backdrop-blur-[1px]"
                 style="clip-path: polygon(0% 0%, 5% 12.5%, 0% 25%, 5% 37.5%, 0% 50%, 5% 62.5%, 0% 75%, 5% 87.5%, 0% 100%, 100% 100%, 95% 87.5%, 100% 75%, 95% 62.5%, 100% 50%, 95% 37.5%, 100% 25%, 95% 12.5%, 100% 0%);">
@@ -51,12 +52,15 @@ const renderStars = (rating: number) => {
               <div class="bg-white dark:bg-[#1a1a1a] mt-2 border-4 border-white dark:border-[#2a2a2a] shadow-xl/20 p-5 pt-7 md:p-8 md:pt-10 transition-all duration-300 hover:shadow-xl/30 hover:-translate-y-1 select-none">
                 <!-- Header con foto y nombre -->
                 <div class="flex items-start gap-4 mb-4">
-                  <div class="relative flex-shrink-0">
+                  <div class="relative shrink-0">
                     {testimonial.image ? (
                       <img 
-                        src={testimonial.image} 
+                        src={getOptimizedImage(testimonial.image, { width: 100, height: 100, crop: 'fill' })} 
                         alt={testimonial.client_name}
                         class="w-14 h-14 rounded-full object-cover"
+                        width="56"
+                        height="56"
+                        loading="lazy"
                       />
                     ) : (
                       <div class="w-14 h-14 rounded-full bg-[#c4c4c4] dark:bg-gray-700 flex items-center justify-center">

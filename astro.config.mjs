@@ -14,6 +14,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
+  // @ts-ignore
   adapter: vercel(),
 
   integrations: [

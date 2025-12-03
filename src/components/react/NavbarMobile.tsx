@@ -218,30 +218,19 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
           </a>
 
           <a 
-            href="https://www.behance.net/joelgadea" 
+            href="https://www.facebook.com/profile.php?id=100073611974767&locale=es_LA" 
             target="_blank"
             rel="noopener noreferrer"
             className={`transition-colors duration-200 ${
               isDark ? 'text-[#ffffff]/50 hover:text-[#ffffff]' : 'text-[#000000]/50 hover:text-[#000000]'
             }`}
-            aria-label="Behance"
+            aria-label="Facebook"
           >
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M22 7h-7v-2h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14h-8.027c.13 3.211 3.483 3.312 4.588 2.029h3.168zm-7.686-4h4.965c-.105-1.547-1.136-2.219-2.477-2.219-1.466 0-2.277.768-2.488 2.219zm-9.574 6.988h-6.466v-14.967h6.953c5.476.081 5.58 5.444 2.72 6.906 3.461 1.26 3.577 8.061-3.207 8.061zm-3.466-8.988h3.584c2.508 0 2.906-3-.312-3h-3.272v3zm3.391 3h-3.391v3.016h3.341c3.055 0 2.868-3.016.05-3.016z"/>
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
             </svg>
           </a>
 
-          <a 
-            href="mailto:contact@gadea-iso.com" 
-            className={`transition-colors duration-200 ${
-              isDark ? 'text-[#ffffff]/50 hover:text-[#ffffff]' : 'text-[#000000]/50 hover:text-[#000000]'
-            }`}
-            aria-label="Email"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-            </svg>
-          </a>
         </div>
       </div>
     </div>

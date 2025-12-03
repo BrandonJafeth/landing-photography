@@ -1,6 +1,7 @@
 ---
 import { supabase } from '@/lib/supabase'
 import type { Service } from '@/lib/supabase'
+import { getOptimizedImage, getSrcSet } from '@/utils/cloudinary'
 
 // Obtener servicios activos desde Supabase
 const { data: services, error } = await supabase
@@ -24,7 +25,7 @@ const activeServices: Service[] = services || []
       <h2 class="text-2xl md:text-3xl font-semibold text-[#000000] dark:text-white mb-2">
         NUESTROS SERVICIOS
       </h2>
-      <div class="w-16 h-[1px] bg-[#000000] dark:bg-white mx-auto mb-6"></div>
+      <div class="w-16 h-px bg-[#000000] dark:bg-white mx-auto mb-6"></div>
       <p class="text-lg text-[#000000]/70 dark:text-gray-400 max-w-2xl tracking-wide mx-auto">
         Capturamos tus momentos más especiales con profesionalismo y dedicación
       </p>
@@ -39,7 +40,9 @@ const activeServices: Service[] = services || []
       {/* Imagen del servicio */}
       <div class="relative h-56 overflow-hidden">
         <img
-          src={service.image}
+          src={getOptimizedImage(service.image, { width: 800, height: 600, crop: 'fill' })}
+          srcset={getSrcSet(service.image, [400, 600, 800], { height: 600, crop: 'fill' })}
+          sizes="(max-width: 768px) 100vw, 50vw"
           alt={service.title}
           class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           loading="lazy"
@@ -52,7 +55,7 @@ const activeServices: Service[] = services || []
           {service.title}
         </h3>
 
-        <div class="w-12 h-[3px] bg-[#000000] dark:bg-white mb-4"></div>
+        <div class="w-12 h-px bg-[#000000] dark:bg-white mb-4"></div>
 
         <p class="text-sm text-[#000000]/70 dark:text-gray-400 mb-4 leading-relaxed tracking-wide min-h-[60px]">
           {service.description}

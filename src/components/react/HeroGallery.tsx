@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import type { FC } from 'react'
+import { getOptimizedImage, getSrcSet } from '@/utils/cloudinary'
 
 interface Image {
   id: string
@@ -27,7 +28,7 @@ export const HeroGallery: FC<HeroGalleryProps> = ({ images }) => {
 
   if (images.length === 0) {
     return (
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-900 to-black" />
+      <div className="absolute inset-0 bg-linear-to-br from-gray-900 to-black" />
     )
   }
 
@@ -43,10 +44,13 @@ export const HeroGallery: FC<HeroGalleryProps> = ({ images }) => {
             }`}
           >
             <img
-              src={image.url}
+              src={getOptimizedImage(image.url, { width: 1920, quality: 'auto', format: 'auto' })}
+              srcSet={getSrcSet(image.url, [640, 768, 1024, 1280, 1536, 1920])}
+              sizes="100vw"
               alt={image.alt}
               className="w-full h-full object-cover"
               loading={index === 0 ? 'eager' : 'lazy'}
+              {...(index === 0 ? { fetchPriority: 'high' } : {})}
             />
             {/* Overlay oscuro para mejorar legibilidad del texto */}
             <div className="absolute inset-0 bg-black/40" />
