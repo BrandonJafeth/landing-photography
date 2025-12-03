@@ -204,7 +204,7 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
           }`}
         >
           <a 
-            href="https://instagram.com" 
+            href="https://www.instagram.com/joelgadea_/" 
             target="_blank"
             rel="noopener noreferrer"
             className={`transition-colors duration-200 ${
@@ -218,7 +218,7 @@ export default function NavbarMobile({ navLinks, currentPath }: NavbarMobileProp
           </a>
 
           <a 
-            href="https://behance.net" 
+            href="https://www.behance.net/joelgadea" 
             target="_blank"
             rel="noopener noreferrer"
             className={`transition-colors duration-200 ${

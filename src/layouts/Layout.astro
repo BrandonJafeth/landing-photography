@@ -9,14 +9,19 @@ import { ClientRouter } from "astro:transitions";
 interface Props {
   title: string;
   description?: string;
+  image?: string;
   transparent?: boolean;
 }
 
 const {
   title,
-  description = "Fotografía profesional - Capturamos tus momentos más especiales",
+  description = "Fotografía profesional en Costa Rica - Capturamos tus momentos más especiales. Bodas, eventos, retratos y más.",
+  image = "/favicon.svg", // TODO: Reemplazar con una imagen real para compartir en redes (ej: /og-image.jpg)
   transparent = false,
 } = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const socialImageURL = new URL(image, Astro.url);
 ---
 
 <!doctype html>
@@ -28,8 +33,58 @@ const {
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO -->
-    <title>{title} | GADEA ISO</title>
+    <title>{title} | GADEA ISO - Fotógrafo en Costa Rica</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+    <meta name="keywords" content="fotografía, fotógrafo, costa rica, bodas, eventos, retratos, profesional, gadea iso, joel gadea, sesiones de fotos" />
+    <meta name="author" content="Joel Gadea" />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Geo Tags for Costa Rica -->
+    <meta name="geo.region" content="CR" />
+    <meta name="geo.placename" content="Costa Rica" />
+    <meta name="geo.position" content="9.7489;-83.7534" />
+    <meta name="ICBM" content="9.7489, -83.7534" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialImageURL} />
+    <meta property="og:site_name" content="GADEA ISO" />
+    <meta property="og:locale" content="es_CR" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={socialImageURL} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" is:inline set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "PhotographyBusiness",
+      "name": "GADEA ISO",
+      "image": socialImageURL.href,
+      "url": "https://www.gadeafotografia.com",
+      "telephone": "+50683518022",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "CR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 9.7489,
+        "longitude": -83.7534
+      },
+      "sameAs": [
+        "https://www.instagram.com/joelgadea_/",
+        "https://www.facebook.com/profile.php?id=100073611974767&locale=es_LA"
+      ],
+      "priceRange": "$$"
+    })} />
 
     <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
