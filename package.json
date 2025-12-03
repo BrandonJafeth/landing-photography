@@ -16,8 +16,8 @@
     "@types/react": "^19.2.3",
     "@types/react-dom": "^19.2.3",
     "astro": "^5.15.1",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "resend": "^6.4.2",
     "tailwindcss": "^4.1.17"
   }
