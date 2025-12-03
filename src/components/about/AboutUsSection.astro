@@ -83,7 +83,8 @@
               <button
                 type="button"
                 data-about-toggle
-                class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-blue-600 dark:text-white hover:underline transition-all"
+                style="display: none;"
+                class="mt-4 inline-flex items-center gap-2 text-sm font-medium text-black dark:text-white hover:underline transition-all"
               >
                 <span data-about-label>Ver más</span>
                 <svg
@@ -131,22 +132,35 @@
   // Pequeño script vanilla para el "Ver más / Ver menos" en mobile
   if (typeof window !== 'undefined') {
     window.addEventListener('DOMContentLoaded', () => {
-      const btn = document.querySelector('[data-about-toggle]');
-      const content = document.querySelector('[data-about-content]');
+      const btn = document.querySelector('[data-about-toggle]') as HTMLElement;
+      const content = document.querySelector('[data-about-content]') as HTMLElement;
       const label = document.querySelector('[data-about-label]');
-      const icon = document.querySelector('[data-about-icon]');
+      const icon = document.querySelector('[data-about-icon]') as HTMLElement;
 
       if (!btn || !content || !label || !icon) return;
+
+      // Verificar si hay contenido
+      const hasContent = content.innerText.trim().length > 0;
+      
+      if (hasContent) {
+        btn.style.display = ''; // Remove display: none to let CSS take over
+      } else {
+        return; // Keep hidden
+      }
 
       let expanded = false;
 
       const updateState = () => {
         if (expanded) {
-          content.classList.add('is-open');
+          content.style.maxHeight = content.scrollHeight + "px";
+          content.style.opacity = "1";
           label.textContent = 'Ver menos';
+          icon.style.transform = 'rotate(180deg)';
         } else {
-          content.classList.remove('is-open');
+          content.style.maxHeight = "0px";
+          content.style.opacity = "0";
           label.textContent = 'Ver más';
+          icon.style.transform = 'rotate(0deg)';
         }
       };
 
@@ -225,11 +239,7 @@
   .about-expandable {
     max-height: 0;
     opacity: 0;
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-  }
-
-  .about-expandable.is-open {
-    max-height: 500px;
-    opacity: 1;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
   }
 </style>
