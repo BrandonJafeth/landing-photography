@@ -15,7 +15,7 @@ interface Props {
 
 const {
   title,
-  description = "Fotografía profesional en Costa Rica - Capturamos tus momentos más especiales. Bodas, eventos, retratos y más.",
+  description = "Fotografía profesional en Nicoya, Guanacaste y todo Costa Rica. Capturamos tus momentos más especiales: bodas, eventos, retratos y sesiones comerciales.",
   image = "/favicon.svg", // TODO: Reemplazar con una imagen real para compartir en redes (ej: /og-image.jpg)
   transparent = false,
 } = Astro.props;
@@ -36,15 +36,15 @@ const socialImageURL = new URL(image, Astro.url);
     <title>{title} | GADEA ISO - Fotógrafo en Costa Rica</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="keywords" content="fotografía, fotógrafo, costa rica, bodas, eventos, retratos, profesional, gadea iso, joel gadea, sesiones de fotos" />
+    <meta name="keywords" content="fotografía, fotógrafo, costa rica, nicoya, guanacaste, bodas, eventos, retratos, profesional, gadea iso, joel gadea, sesiones de fotos, fotógrafo en nicoya, fotógrafo en guanacaste, fotografía de bodas guanacaste" />
     <meta name="author" content="Joel Gadea" />
     <meta name="robots" content="index, follow" />
 
     <!-- Geo Tags for Costa Rica -->
-    <meta name="geo.region" content="CR" />
-    <meta name="geo.placename" content="Costa Rica" />
-    <meta name="geo.position" content="9.7489;-83.7534" />
-    <meta name="ICBM" content="9.7489, -83.7534" />
+    <meta name="geo.region" content="CR-G" />
+    <meta name="geo.placename" content="Nicoya, Guanacaste" />
+    <meta name="geo.position" content="10.1444;-85.4517" />
+    <meta name="ICBM" content="10.1444, -85.4517" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -72,12 +72,14 @@ const socialImageURL = new URL(image, Astro.url);
       "telephone": "+50683518022",
       "address": {
         "@type": "PostalAddress",
+        "addressLocality": "Nicoya",
+        "addressRegion": "Guanacaste",
         "addressCountry": "CR"
       },
       "geo": {
         "@type": "GeoCoordinates",
-        "latitude": 9.7489,
-        "longitude": -83.7534
+        "latitude": 10.1444,
+        "longitude": -85.4517
       },
       "sameAs": [
         "https://www.instagram.com/joelgadea_/",
