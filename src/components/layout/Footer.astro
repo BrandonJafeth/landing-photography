@@ -210,7 +210,14 @@ const currentYear = new Date().getFullYear();
               >
                 Ubicación
               </p>
-              <p class="text-gray-100 dark:text-gray-400">{contact.location}</p>
+              <a
+                href={contact.googleMaps}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-gray-100 dark:text-gray-400 hover:text-white dark:hover:text-gray-200 transition-colors hover:underline"
+              >
+                {contact.location}
+              </a>
             </div>
           </div>
 
