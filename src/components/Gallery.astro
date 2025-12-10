@@ -7,8 +7,7 @@ const { data: featuredImages, error } = await supabase
   .from('portfolio_images')
   .select('*')
   .eq('is_visible', true)
-  .eq('is_featured', true)
-  .order('featured_order', { ascending: true })
+  .order('order', { ascending: true })
   .limit(7)
 
 if (error) {
