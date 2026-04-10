@@ -167,11 +167,9 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
               {/* Imagen */}
               <img
                 src={getOptimizedImage(
-                  (filteredImages.length === 1 || (index === 0 && filteredImages.length >= 6)) 
-                    ? image.image_url 
-                    : (image.thumbnail_url || image.image_url),
+                  image.image_url,
                   { 
-                    width: (filteredImages.length === 1 || (index === 0 && filteredImages.length >= 6)) ? 1200 : 600, 
+                    width: (filteredImages.length === 1 || (index === 0 && filteredImages.length >= 6)) ? 1200 : 800, 
                     quality: 'auto' 
                   }
                 )}
