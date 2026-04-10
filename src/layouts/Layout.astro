@@ -33,16 +33,16 @@ const socialImageURL = new URL(image, Astro.url);
     <meta name="generator" content={Astro.generator} />
 
     <!-- SEO -->
-    <title>{title} | GADEA ISO - Nicoya & Guanacaste</title>
+    <title>{title} | GADEA ISO - Fotógrafo Profesional en Costa Rica</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
-    <meta name="keywords" content="fotógrafo profesional costa rica, fotógrafo en nicoya, fotógrafo en guanacaste, fotografía de bodas, sesiones familiares, retratos empresariales, eventos corporativos, marca personal, sesiones de maternidad, fotografía comercial, gadea iso, joel gadea" />
+    <meta name="keywords" content="fotógrafo profesional costa rica, fotógrafo en nicoya, fotógrafo en guanacaste, fotografía de bodas costa rica, bodas guanacaste, sesiones familiares costa rica, retratos empresariales, fotografía comercial costa rica, joel gadea, gadea iso" />
     <meta name="author" content="Joel Gadea" />
     <meta name="robots" content="index, follow" />
 
     <!-- Geo Tags for Costa Rica -->
     <meta name="geo.region" content="CR-G" />
-    <meta name="geo.placename" content="Nicoya, Guanacaste" />
+    <meta name="geo.placename" content="Nicoya, Guanacaste, Costa Rica" />
     <meta name="geo.position" content="10.1444;-85.4517" />
     <meta name="ICBM" content="10.1444, -85.4517" />
 
@@ -52,7 +52,7 @@ const socialImageURL = new URL(image, Astro.url);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
-    <meta property="og:site_name" content="GADEA ISO" />
+    <meta property="og:site_name" content="GADEA ISO - Fotografía Profesional" />
     <meta property="og:locale" content="es_CR" />
 
     <!-- Twitter -->
@@ -68,12 +68,16 @@ const socialImageURL = new URL(image, Astro.url);
       "@type": "PhotographyBusiness",
       "name": "GADEA ISO",
       "image": socialImageURL.href,
-      "url": "https://www.gadeafotografia.com",
+      "url": "https://www.gadeafotografia.com/",
       "telephone": "+50683518022",
+      "email": "info@gadeafotografia.com",
+      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "Nicoya Centro",
         "addressLocality": "Nicoya",
         "addressRegion": "Guanacaste",
+        "postalCode": "50201",
         "addressCountry": "CR"
       },
       "geo": {
@@ -81,12 +85,24 @@ const socialImageURL = new URL(image, Astro.url);
         "latitude": 10.1444,
         "longitude": -85.4517
       },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      },
       "sameAs": [
         "https://www.instagram.com/joelgadea_/",
         "https://www.facebook.com/profile.php?id=100073611974767&locale=es_LA",
         "https://share.google/JJ4g9NcRcFLmyBmbt"
-      ],
-      "priceRange": "$$"
+      ]
     })} />
 
     <!-- Preconnect -->

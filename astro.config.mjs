@@ -9,6 +9,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: 'https://www.gadeafotografia.com',
   output: 'server', // Habilita SSR para API routes
+  trailingSlash: 'always',
   
   vite: {
     plugins: [tailwindcss()],
