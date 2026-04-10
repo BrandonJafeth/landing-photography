@@ -170,7 +170,10 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
                   (filteredImages.length === 1 || (index === 0 && filteredImages.length >= 6)) 
                     ? image.image_url 
                     : (image.thumbnail_url || image.image_url),
-                  { width: 600, quality: 'auto' }
+                  { 
+                    width: (filteredImages.length === 1 || (index === 0 && filteredImages.length >= 6)) ? 1200 : 600, 
+                    quality: 'auto' 
+                  }
                 )}
                 alt={image.alt || image.title || 'Portfolio image'}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
