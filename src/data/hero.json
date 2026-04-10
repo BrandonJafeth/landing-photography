@@ -3,10 +3,10 @@
   "subtitle": "Capturamos momentos inolvidables en Guanacaste y todo Costa Rica: Bodas, eventos y fotografía comercial de alto nivel.",
   "primaryCta": {
     "text": "Ver Galería",
-    "link": "/portafolio"
+    "link": "/portafolio/"
   },
   "secondaryCta": {
     "text": "Contáctanos",
-    "link": "/contacto"
+    "link": "/contacto/"
   }
 }

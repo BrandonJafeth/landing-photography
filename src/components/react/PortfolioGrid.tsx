@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import { getOptimizedImage } from '@/utils/cloudinary';
 
 interface Category {
   id: string;
@@ -28,6 +29,7 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
   const [selectedImage, setSelectedImage] = useState<PortfolioImage | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
+
   // Filtrar imágenes por categoría
   const filteredImages = useMemo(() => {
     if (selectedCategory === 'all') {
@@ -35,6 +37,17 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
     }
     return images.filter(img => img.category_id === selectedCategory);
   }, [images, selectedCategory]);
+
+  // TÉCNICA DE PRE-CARGA: Cargar imágenes en caché cuando se abre el modal
+  useEffect(() => {
+    if (selectedImage && filteredImages.length > 0) {
+      filteredImages.forEach((img) => {
+        const fullResUrl = getOptimizedImage(img.image_url, { width: 1600, quality: 'auto' });
+        const preloader = new Image();
+        preloader.src = fullResUrl;
+      });
+    }
+  }, [selectedImage !== null, filteredImages, selectedCategory]);
 
   // Formatear nombre de categoría para mostrar
   const formatCategory = (categoryId: string): string => {
@@ -49,6 +62,7 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
     setCurrentIndex(index);
     document.body.style.overflow = 'hidden'; // Prevenir scroll del body
   };
+
 
   // Cerrar modal
   const closeModal = () => {
@@ -149,16 +163,15 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
                     : ''
                 }
               `}
-              style={{
-                animationDelay: `${index * 0.1}s`,
-              }}
             >
               {/* Imagen */}
               <img
-                src={(filteredImages.length === 1 || (index === 0 && filteredImages.length >= 6)) 
-                  ? image.image_url 
-                  : (image.thumbnail_url || image.image_url)
-                }
+                src={getOptimizedImage(
+                  (filteredImages.length === 1 || (index === 0 && filteredImages.length >= 6)) 
+                    ? image.image_url 
+                    : (image.thumbnail_url || image.image_url),
+                  { width: 600, quality: 'auto' }
+                )}
                 alt={image.alt || image.title || 'Portfolio image'}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                 loading="lazy"
@@ -286,9 +299,9 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src={selectedImage.image_url}
+              src={getOptimizedImage(selectedImage.image_url, { width: 1600, quality: 'auto' })}
               alt={selectedImage.alt || selectedImage.title || 'Portfolio image'}
-              className="max-w-full max-h-[90vh] object-contain rounded-lg"
+              className="max-w-full max-h-[90vh] object-contain rounded-lg pointer-events-none"
             />
 
             {/* Información de la imagen */}
@@ -317,3 +330,4 @@ export default function PortfolioGrid({ images, categories }: PortfolioGridProps
     </div>
   );
 }
+

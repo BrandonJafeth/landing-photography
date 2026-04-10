@@ -35,7 +35,7 @@ const images = featuredImages || []
       <div class="bento-grid">
         {images.map((image, index) => (
           <a
-            href={image.link_url || '/portafolio'}
+            href={image.link_url || '/portafolio/'}
             class={`bento-item bento-item-${index + 1} group`}
             data-category={image.category}
           >
@@ -56,7 +56,7 @@ const images = featuredImages || []
       <!-- Botón para ver galería completa -->
       <div class="text-center mt-12">
         <a
-          href="/portafolio"
+          href="/portafolio/"
           class="inline-flex items-center gap-2 px-8 py-3 border-2 border-[#000000] dark:border-white text-[#000000] dark:text-white text-sm font-medium rounded-md transition-all duration-300 hover:bg-[#000000] hover:text-white dark:hover:bg-white dark:hover:text-[#000000] group"
         >
           <span>Ver Galería Completa</span>
